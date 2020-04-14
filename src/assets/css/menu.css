@@ -1,0 +1,54 @@
+#menu {
+    width: 308px;
+    height: 100vh;
+    background: rgba(36, 36, 36, 1);
+    overflow: hidden;
+    float: left;
+}
+
+.topbox {
+    width: 255px;
+    height: 111px;
+    background: rgba(54, 54, 54, 1);
+    border-radius: 4px;
+    margin-left: 20px;
+    margin-top: 40px;
+    overflow: hidden;
+}
+
+.topbox .name {
+    width: 69px;
+    height: 69px;
+    background: rgba(237, 237, 237, 1);
+    border-radius: 50%;
+    color: #474749;
+    font-size: 29px;
+    line-height: 69px;
+    text-align: center;
+    margin-left:25px;
+    margin-top:21px;
+    float: left;
+}
+
+.topbox .rightname {
+    float: left;
+    margin-left:4px;
+    overflow: hidden;
+    margin-top:36px;
+}
+
+.topbox .rightname .s1{
+    color:#fff;
+    font-size:22px;
+}
+.topbox .rightname .s2{
+    color:#E46943;
+    font-size:14px;
+    cursor: pointer;
+}
+#menu .nav{
+    width:255px;
+    margin-left:20px;
+    margin-top:37px;
+    background-color:transparent;
+}

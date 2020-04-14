@@ -1,0 +1,863 @@
+/* 用户信息 */
+
+.user-info-form.singlefFundFlow-form .el-input__inner {
+  width: 200px;
+}
+
+.qrcode-link .el-input {
+  width: 330px !important;
+}
+
+.qrcode-link .el-button--primary {
+  padding: 5px 20px !important;
+  margin-left: 20px;
+}
+
+/* 收款通道配置 */
+
+.system-pay-form.singlefFundFlow-form .el-input__inner {
+  width: 250px;
+}
+
+/* 分仓下级机构设置 */
+
+.agent-add-dialog.institutions-dialog {
+  width: 705px !important;
+}
+
+.agent-add-dialog .agent-form.institutions-form .el-form-item {
+  margin-right: 0;
+}
+
+/* 柜员用户管理 */
+
+.user-dialog {
+  width: 706px !important;
+  margin-top: 20vh !important;
+}
+
+.user-dialog .user-form .el-form-item {
+  margin-right: 47px;
+}
+
+.user-dialog .user-form .remarks-item {
+  margin-right: 0;
+  margin-bottom: 0;
+}
+
+.user-form .el-form-item:nth-child(even) {
+  margin-right: 0;
+}
+
+.user-form .el-form-item__label, .user-form .el-checkbox__label {
+  color: #ccc;
+}
+
+.user-form .el-input {
+  width: auto;
+}
+
+.user-form .el-input__inner {
+  width: 204px;
+  height: 25px;
+}
+
+.user-form .remarks-input .el-input__inner {
+  width: 625px;
+}
+
+.user-form .required-info {
+  color: #4bafdb;
+  font-size: 24px;
+  display: inline-block;
+  vertical-align: top;
+  width: 11px;
+  margin-left: 8px;
+  position: relative;
+  top: 6px;
+}
+
+.required-star {
+  color: #4bafdb;
+  font-size: 24px;
+}
+
+.user-dialog.el-dialog .el-dialog__footer {
+  text-align: right;
+}
+
+.user-form .el-checkbox-group {
+  display: inline-block;
+}
+
+.user-form .el-radio+.el-radio {
+  margin-left: 12px;
+}
+
+.user-dialog .dialog-footer .el-button {
+  width: 87px !important;
+}
+
+/* 管理员权限管理 */
+
+.teller-rule.reset-dialog .el-dialog__body {
+  padding: 24px 28px 18px;
+}
+
+.resetrulerule .dialog-footer {
+  border-top: none !important;
+}
+
+/* 风控员权限管理 */
+
+.risk-windController .el-form-item__content .el-input__inner {
+  width: 140px;
+}
+
+.wind-control-account-edit.sub-account-deposit-copy-dialog {
+  width: 330px !important;
+}
+
+.wind-control-account-edit.sub-account-deposit-copy-dialog .set-dialog-content .part .top label {
+  width: 61px;
+  display: inline-block;
+  text-align: left;
+}
+
+.wind-control-account-edit.sub-account-deposit-copy-dialog .set-dialog-content .part .el-select .el-input__inner {
+  width: 198px;
+}
+
+/* 资金账户管理 */
+
+.account-master-edit-dialog.account-deposit-edit-dialog {
+  width: 430px !important;
+}
+
+.account-master-edit-dialog.account-deposit-edit-dialog.branch-edit-dialog {
+  width: 400px !important;
+}
+
+.account-master-edit-form.account-deposit-edit-form .el-input__inner {
+  width: 200px;
+  background-color: transparent;
+}
+
+/* 分账户管理 */
+
+input[type="number"]::-webkit-inner-spin-button, input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* 风控员监控管理 */
+
+.dealer-edit.wind-control-account-edit.sub-account-deposit-copy-dialog {
+  width: 410px !important;
+}
+
+.dealer-edit.wind-control-account-edit.sub-account-deposit-copy-dialog .set-dialog-content .part .top-select .el-select .el-input__inner {
+  width: 167px;
+}
+
+/* 单账户出入金 */
+
+.singlefFundFlow-form .el-form-item {
+  display: block;
+}
+
+.singlefFundFlow-form .el-form-item__label, .singlefFundFlow-form .el-radio__label {
+  color: #fff;
+}
+
+.singlefFundFlow-form .el-input {
+  width: auto;
+}
+
+.singlefFundFlow-form .el-input__inner {
+  width: 210px;
+}
+
+.singlefFundFlow-form .zero-round {
+  color: #4bafdb;
+  line-height: 42px;
+}
+
+.advanced-settings.reset-dialog {
+  width: 360px !important;
+}
+
+.advanced-settings.reset-dialog .el-dialog__body {
+  padding: 35px 28px 5px;
+}
+
+.advanced-settings .el-dialog .dialog-footer .el-button {
+  width: 77px;
+}
+
+.advanced-settings .el-button+.el-button {
+  margin-left: 20px !important;
+}
+
+.advanced-settings .dialog-footer {
+  text-align: right;
+}
+
+.advanced-settings .el-input {
+  float: right;
+  height: 25px;
+  line-height: 25px;
+  width: 200px !important;
+}
+
+/* 批量出入金 */
+
+.fund-account-table {
+  float: left;
+  margin-left: 40px;
+}
+
+.fund-account-table .part .top {
+  height: 25px;
+  line-height: 25px;
+  margin-bottom: 24px;
+}
+
+.fund-account-table .part .top label {
+  font-size: 12px;
+  color: #fff;
+}
+
+.fund-account-table .part .el-select .el-input__inner {
+  width: 167px;
+}
+
+/* 资金账户保证金管理 */
+
+.account-deposit-form .el-form-item {
+  margin-right: 20px;
+  margin-bottom: 0;
+}
+
+.account-deposit-form .el-form-item__label {
+  color: #fff;
+  line-height: unset;
+}
+
+.account-deposit-form .el-form-item__content {
+  line-height: unset;
+}
+
+.el-checkbox__inner {
+  z-index: 0;
+}
+
+.account-deposit-dialog {
+  margin-top: 18vh !important;
+  width: 420px !important;
+}
+
+.reset-dialog {
+  width: 472px !important;
+}
+
+.reset-dialog .el-dialog__body {
+  padding: 35px 46px 5px;
+}
+
+.reset-dialog-content {
+  color: #ccc;
+  line-height: 1.5;
+  text-align: center;
+}
+
+.reset-dialog .el-dialog__footer {
+  height: 106px;
+  text-align: center;
+}
+
+.reset-dialog .dialog-footer {
+  border-top: none !important;
+}
+
+.reset-dialog .dialog-footer .el-button {
+  margin-top: 42px;
+}
+
+.reset-dialog .el-button+.el-button {
+  margin-left: 140px;
+}
+
+.account-deposit-edit-form .el-form-item__label {
+  color: #ccc;
+}
+
+.account-deposit-edit-form .el-input {
+  width: auto;
+}
+
+.account-deposit-edit-form .el-input__inner {
+  width: 150px;
+}
+
+.account-deposit-edit-form .percent-sign {
+  color: #ccc;
+  font-size: 14px;
+  display: inline-block;
+  vertical-align: top;
+  width: 11px;
+  margin-left: 8px;
+  position: relative;
+  top: 4px;
+}
+
+/* 分账户保证金管理 */
+
+.subAccount-deposit-form .el-form-item {
+  margin-right: 18px;
+  margin-bottom: 0;
+}
+
+.subAccount-deposit-form .el-form-item__label {
+  color: #fff;
+  line-height: unset;
+}
+
+.subAccount-deposit-form .el-input__inner {
+  width: 140px;
+}
+
+.el-checkbox__inner {
+  z-index: 0;
+}
+
+/***修改分账户保证金***/
+
+.account-deposit-edit-dialog {
+  width: 320px !important;
+}
+
+/***设置分账户保证金***/
+
+.sub-account-deposit-set-dialog {
+  width: 850px !important;
+}
+
+.sub-account-deposit-set-dialog .set-dialog-content {
+  overflow: hidden;
+}
+
+.sub-account-deposit-set-dialog .set-dialog-content .part {
+  float: left;
+  width: 265px;
+  margin-right: 26px;
+}
+
+.sub-account-deposit-set-dialog .set-dialog-content .part .top {
+  height: 25px;
+  margin-bottom: 24px;
+  color: #ccc;
+  font-size: 12px;
+}
+
+.sub-account-deposit-set-dialog .set-dialog-content .part .top label {
+  font-size: 12px;
+  color: #ccc;
+}
+
+.sub-account-deposit-set-dialog .set-dialog-content .part:nth-of-type(1) .el-select .el-input__inner {
+  width: 174px;
+}
+
+.sub-account-deposit-set-dialog .set-dialog-content .part:nth-of-type(2) .el-select .el-input__inner {
+  width: 186px;
+}
+
+.sub-account-deposit-set-dialog .sub-account-deposit-set-form {
+  float: left;
+  width: 210px;
+}
+
+.sub-account-deposit-set-dialog .sub-account-deposit-set-form .el-form-item {
+  margin-bottom: 15px;
+}
+
+.sub-account-deposit-set-dialog .sub-account-deposit-set-form .el-form-item__label {
+  color: #ccc;
+  float: none;
+}
+
+.sub-account-deposit-set-dialog .sub-account-deposit-set-form .el-form-item__content {
+  color: #ccc;
+  margin-left: 0;
+}
+
+.sub-account-deposit-set-dialog .sub-account-deposit-set-form .el-input {
+  width: auto;
+}
+
+.sub-account-deposit-set-dialog .sub-account-deposit-set-form .el-input__inner {
+  width: 190px;
+}
+
+/***复制分账户保证金***/
+
+.sub-account-deposit-copy-dialog {
+  width: 320px !important;
+  margin-top: 16vh !important;
+}
+
+.sub-account-deposit-copy-dialog .set-dialog-content .part .top {
+  margin-bottom: 24px;
+}
+
+.sub-account-deposit-copy-dialog .set-dialog-content .part .top label {
+  font-size: 12px;
+  color: #ccc;
+}
+
+.sub-account-deposit-copy-dialog .set-dialog-content .part .el-select .el-input__inner {
+  width: 198px;
+}
+
+/* 资金账户手续费管理 */
+
+.account-fee-edit-dialog.account-deposit-edit-dialog {
+  width: 330px !important;
+  margin-top: 16vh !important;
+}
+
+/* 分账户手续费管理 */
+
+/***设置分账户保证金***/
+
+.sub-account-fee-set-dialog.sub-account-deposit-set-dialog {
+  width: 860px !important;
+}
+
+.sub-account-fee-set-dialog .sub-account-fee-set-form.sub-account-deposit-set-form {
+  width: 220px;
+}
+
+.sub-account-fee-set-dialog .sub-account-fee-set-form.sub-account-deposit-set-form .el-checkbox {
+  margin-top: 8px;
+}
+
+.sub-account-detail.user-dialog {
+  width: 545px !important;
+}
+
+/* 分账户基础交易权限 */
+
+.add-basic-trade-permissions.sub-account-deposit-set-dialog.jq-reset-width {
+  width: 890px !important;
+}
+
+.add-basic-trade-permissions .add-dialog-right {
+  float: left;
+  width: 540px;
+  height: 446px;
+  border-left: 1px solid rgb(121, 121, 121);
+  padding-left: 26px;
+  box-sizing: border-box;
+  font-size: 12px;
+}
+
+.add-basic-trade-permissions .time-selector .el-date-editor.el-input, .edit-basic-trade-permissions .time-selector .el-date-editor.el-input {
+  width: 120px;
+}
+
+.edit-basic-trade-permissions.sub-account-deposit-set-dialog {
+  width: 500px !important;
+}
+
+.edit-basic-trade-permissions.sub-account-deposit-set-dialog .set-dialog-content .part {
+  width: 100%;
+}
+
+.edit-basic-trade-permissions.sub-account-deposit-set-dialog .set-dialog-content .part:nth-of-type(1) .top .el-input {
+  width: auto;
+}
+
+.edit-basic-trade-permissions.sub-account-deposit-set-dialog .set-dialog-content .part:nth-of-type(1) .top .el-input__inner {
+  width: 180px;
+  height: 25px !important;
+  line-height: 25px !important;
+}
+
+/* 分账户品种交易权限 */
+
+.goods-reset.reset-width-dialog.account-deposit-edit-dialog.account-deposit-dialog {
+  width: 315px !important;
+}
+
+.add-variety-trade-authority.sub-account-deposit-set-dialog {
+  width: 615px !important;
+}
+
+.add-variety-trade-authority.sub-account-deposit-set-dialog .set-dialog-content .part:nth-of-type(2) {
+  margin-right: 0;
+}
+
+.edit-variety-trade-authority-form.account-deposit-edit-form .el-input__inner {
+  width: 170px;
+}
+
+.typeRadio .contract-type {
+  margin-top: 10px;
+  color: #ccc;
+}
+
+/* 分账户资金指标风控 */
+
+.sub-account-deposit-set-dialog.add-basic-trade-permissions.add-target-dialog.j-reset-width {
+  width: 720px !important;
+}
+
+.add-dialog-right.j-reset-add-width {
+  width: 370px !important;
+}
+
+.add-target-dialog {
+  width: 752px !important;
+}
+
+.reset-form-now {
+  margin-bottom: 30px;
+}
+
+.reset-form-now .el-select {
+  width: 110px !important;
+  height: 25px;
+}
+
+.reset-form-now .el-select input {
+  height: 25px;
+}
+
+.reset-form-now .el-input {
+  width: 110px !important;
+  height: 25px;
+}
+
+.reset-form-now .el-input input {
+  height: 25px;
+}
+
+.edit-variety-trade-authority-form.account-deposit-edit-form .reset-form-now .el-input__inner {
+  width: 110px;
+}
+
+.reset-change-width {
+  width: 420px !important;
+}
+
+/* 分账户交易数量权限 */
+
+.add-trade-quantity-permission.sub-account-deposit-set-dialog {
+  width: 825px !important;
+}
+
+.add-trade-quantity-permission.sub-account-deposit-set-dialog .sub-account-deposit-set-form {
+  width: auto;
+}
+
+.reset-money-width.account-deposit-edit-dialog.account-deposit-dialog {
+  width: 300px !important;
+}
+
+.smallTypeRadio .el-table__header .el-checkbox {
+  display: none;
+}
+
+/* 分账户定时仓位风控 */
+
+.add-timing-position-control.add-basic-trade-permissions.sub-account-deposit-set-dialog {
+  width: 985px !important;
+}
+
+.add-timing-position-control.sub-account-deposit-set-dialog .set-dialog-content .part .top {
+  margin-bottom: 22px;
+}
+
+.add-timing-position-control.add-basic-trade-permissions .add-dialog-right {
+  width: auto;
+  height: auto;
+  border-left: none;
+  padding-left: 0;
+}
+
+.add-timing-position-control .operate {
+  margin-top: 20px;
+  color: #ccc;
+  font-size: 14px;
+}
+
+.add-timing-position-control .operate .el-input {
+  width: auto;
+}
+
+.add-timing-position-control .operate .el-input__inner {
+  width: 156px;
+}
+
+.add-timing-position-control .text-area {
+  padding: 20px 0;
+  border-bottom: 1px solid rgb(121, 121, 121);
+}
+
+.add-timing-position-control .el-textarea__inner {
+  height: 114px;
+}
+
+.add-timing-position-control .variety-selector {
+  padding-top: 20px;
+  overflow: hidden;
+}
+
+.add-timing-position-control .variety-selector .transfer-box {
+  float: left;
+  width: 98px;
+  margin-top: 58px;
+}
+
+.add-timing-position-control .variety-selector .transfer-box .transfer-btn {
+  width: 52px;
+  height: 26px;
+  line-height: 26px;
+  background-color: rgb(102, 102, 102);
+  color: rgb(222, 222, 222);
+  text-align: center;
+  font-size: 16px;
+  margin: 0 auto;
+  cursor: pointer;
+}
+
+.add-timing-position-control .variety-selector .transfer-box .transfer-btn:nth-of-type(2) {
+  margin-top: 8px;
+}
+
+.add-timing-position-control .variety-selector .transfer-box .transfer-btn:nth-of-type(3) {
+  margin-top: 30px;
+}
+
+.add-timing-position-control .variety-selector .transfer-box .transfer-btn:nth-of-type(4) {
+  margin-top: 8px;
+}
+
+.add-timing-position-control .variety-selector .part {
+  margin-right: 0;
+}
+
+.add-timing-position-control .add-dialog-right .no-open {
+  margin-top: 8px;
+}
+
+.edit-timing-position-control.add-basic-trade-permissions.sub-account-deposit-set-dialog {
+  width: 690px !important;
+}
+
+.edit-timing-position-control .edit-timing-position-control-top .top {
+  margin-bottom: 0;
+}
+
+.edit-timing-position-control .edit-timing-position-control-top .top .el-input {
+  width: auto;
+}
+
+.edit-timing-position-control .edit-timing-position-control-top .top .el-input__inner {
+  width: 174px;
+}
+
+.el-checkbox__label {
+  color: #ccc;
+}
+
+/* 资金账户手数控制 */
+
+.lots-edit-dialog.account-master-edit-dialog.account-deposit-edit-dialog {
+  width: 342px !important;
+}
+
+/* 查询 */
+
+.table-header-popover {
+  width: 170px !important;
+  height: 200px;
+  background: #fff;
+  border: none;
+  padding: 0;
+  padding-bottom: 27px;
+  box-sizing: border-box;
+  color: #ccc;
+  font-size: 12px;
+}
+
+.filter-options-box {
+  height: 168px;
+  padding: 5px 12px 0;
+}
+
+.filter-options-box .filter-option {
+  margin-bottom: 5px;
+}
+
+.table-header-popover .filter-btns {
+  overflow: hidden;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+}
+
+.table-header-popover .filter-btns>div {
+  float: left;
+  width: 85px;
+  height: 27px;
+  line-height: 27px;
+  background: rgb(51, 51, 51);
+  text-align: center;
+  cursor: pointer;
+}
+
+.table-header-popover .filter-btns .center {
+  border-right: 1px solid rgb(121, 121, 121);
+  box-sizing: border-box;
+}
+
+.table-header-popover .popper__arrow {
+  display: none;
+}
+
+.filter-img {
+  position: absolute;
+  top: 0;
+  right: 5px;
+  cursor: pointer;
+}
+
+.set-table-header {
+  width: 251px !important;
+}
+
+.set-table-header .el-dialog__footer {
+  height: 43px !important;
+}
+
+.set-table-header .dialog-footer {
+  border: none;
+}
+
+.set-table-header .dialog-footer .el-button {
+  margin-top: 0 !important;
+}
+
+.set-table-header .dialog-footer .cancel-btn {
+  margin-left: 17px;
+}
+
+.table-header-list {
+  height: 264px;
+}
+
+/* 产品成交明细、产品成交汇总 */
+
+.trade-detail-form.subAccount-deposit-form .el-form-item {
+  margin-bottom: 10px;
+}
+
+.trade-detail-form.subAccount-deposit-form .el-form-item:nth-of-type(3) .el-form-item__label {}
+
+.top-find-box {
+  float: left;
+  width: 1228px;
+}
+
+.top-find-box .trade-detail-form .el-date-editor .el-input__inner {
+  width: 200px;
+}
+
+/* 机构管理 */
+
+.institutions-dialog {
+  width: 702px !important;
+  margin-top: 20vh !important;
+}
+
+.institutions-dialog .institutions-form .el-form-item {
+  margin-right: 58px;
+}
+
+.institutions-dialog .institutions-form .el-form-item:nth-child(even) {
+  margin-right: 0;
+}
+
+.institutions-dialog .institutions-form .el-form-item:nth-last-child(1) {
+  margin-bottom: 0;
+}
+
+.institutions-dialog .institutions-form .el-form-item__label, .institutions-dialog .institutions-form .el-checkbox__label {
+  color: #ccc;
+}
+
+.institutions-dialog .institutions-form .el-input {
+  width: auto;
+}
+
+.institutions-dialog .institutions-form .el-input__inner {
+  width: 204px;
+  height: 25px;
+}
+
+.institutions-dialog .institutions-form .region-select .el-input__inner {
+  width: 72px;
+  height: 25px;
+  padding: 0 18px 0 8px;
+}
+
+.institutions-dialog .institutions-form .region-select .el-input__icon {
+  width: 12px;
+}
+
+.institutions-dialog .institutions-form .region-select1 .el-input__inner {
+  width: 204px;
+  height: 25px;
+  padding: 0 18px 0 8px;
+}
+
+.institutions-dialog .institutions-form .region-select1 .el-input__icon {
+  width: 12px;
+}
+
+.institutions-dialog .institutions-form .region-text {
+  display: inline-block;
+  margin: 0 5px;
+  color: #ccc;
+}
+
+.institutions-dialog .institutions-form .remarks-input .el-input__inner {
+  width: 625px;
+}
+
+.institutions-dialog .institutions-form .remarks-input1 .el-input__inner {
+  width: 450px;
+}
+
+.institutions-dialog.el-dialog .el-dialog__footer {
+  text-align: right;
+}
+
+.institutions-form .el-checkbox-group {
+  display: inline-block;
+}
+
+.institutions-form .el-radio+.el-radio {
+  margin-left: 12px;
+}
+
+.institutions-dialog .dialog-footer .el-button {
+  width: 87px !important;
+}
+
+.recharge-dialog.reset-dialog .el-dialog__footer {
+  text-align: right;
+}
