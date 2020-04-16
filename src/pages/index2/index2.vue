@@ -42,6 +42,14 @@
               <el-option v-for="(item,index) in bList" :key="index" :label="item.v" :value="item.k"></el-option>
             </el-select>
           </div>
+          <div class="j1" style="margin-top:-1px;">
+            <div class="d1">合约A价格放大倍数</div>
+            <el-input v-model="a2"></el-input>
+          </div>
+          <div class="j1">
+            <div class="d1">合约A报单每手乘数</div>
+            <el-input v-model="a1"></el-input>
+          </div>
           <div class="j1">
             <div class="d1">合约B</div>
             <el-select v-model="kb" style="width:20%;" filterable remote :remote-method="remoteMethoda" clearable placeholder="请输入期货合约">
@@ -101,17 +109,17 @@
         <el-table-column prop="strategy_id" label="策略ID" width="140"></el-table-column>
         <el-table-column prop="event_type_desc" label="事件类型" width="100"></el-table-column>
         <el-table-column prop="event_time" label="发生时间" width="180"></el-table-column>
-        <el-table-column prop="event_detail" label="事件详情"></el-table-column>
+        <el-table-column prop="event_detail" label="事件详情" ></el-table-column>
         <!-- <el-table-column align="right">
           <template slot="header">
             <el-select v-model="value1" style="width:20%;" filterable clearable placeholder="策略名称">
-              <el-option v-for="(item,index) in StrategyName1" :key="index" :value="item.value"></el-option>
+              <el-option v-for="(item,index) in StrategyName1" :key="index" :label="item.v" :value="item.k"></el-option>
             </el-select>
             <el-select v-model="value2" style="width:18%;" filterable clearable placeholder="策略ID">
-              <el-option v-for="(item,index) in StrategyID1" :key="index" :value="item.value"></el-option>
+              <el-option v-for="(item,index) in StrategyID1" :key="index" :label="item.v" :value="item.k"></el-option>
             </el-select>
             <el-select v-model="value3" style="width:20%;" filterable clearable placeholder="事件类型">
-              <el-option v-for="(item,index) in EventType1" :key="index" :label="item.value" :value="item.key"></el-option>
+              <el-option v-for="(item,index) in EventType1" :key="index" :label="item.v" :value="item.k"></el-option>
             </el-select>
             <el-date-picker v-model="value4" type="datetime" placeholder="发生时间" style="width:23%;"></el-date-picker>
             <el-button @click="search">搜索</el-button>
@@ -199,6 +207,8 @@ export default {
       ka: "",
       //期货
       kb: "",
+      a1: "",
+      a2: "",
       p1: "",
       p2: "",
       p3: "",
@@ -275,10 +285,12 @@ export default {
             let a = JSON.parse(data.python_strategy_data_config);
             this.ka = data.contract_list.split(",")[0];
             this.kb = data.contract_list.split(",")[1];
-            this.p1 = a.price_diff_open;
-            this.p2 = a.price_diff_close;
-            this.p3 = a.trade_lots;
-            this.p4 = a.trade_lots;
+            this.a1 = a.multiplier_order_num_a; //报单每手乘数
+            this.a2 = a.multiplier_price_a; //价格放大倍数
+            this.p1 = a.price_diff_open; //开仓价差
+            this.p2 = a.price_diff_close; //平仓价差
+            this.p3 = a.trade_lots; //每次交易对数
+            this.p4 = a.max_lots; //最大持仓数
           } else {
             this.$alert(response.data.msg);
           }
@@ -401,6 +413,8 @@ export default {
           strategy_data_config: {
             contract_a: this.ka.split("-")[1],
             contract_b: this.kb.split("-")[1],
+            multiplier_order_num_a: this.a1,
+            multiplier_price_a: this.a2,
             price_diff_open: this.p1,
             price_diff_close: this.p2,
             trade_lots: this.p3,
@@ -480,16 +494,14 @@ export default {
     },
     getEventType: function(type) {
       this.axios
-        .post("/three/search/field", {
-          BrokerID: this.BrokerID,
-          UserAccountID: this.UserAccountID,
-          SearchField: type
+        .post("/api.v1/strategy/search", {
+          field: type
         })
         .then(response => {
-          if (response.data.code == 1) {
+          if (response.data.code == 0) {
             if (type == "EventType") {
               this.EventType1 = response.data.data;
-              console.log("类型", this.EventType1.constructor == Array);
+              console.log('777',this.EventType1)
               // console.log("事件类型", typeof(this.EventType1));
             } else if (type == "StrategyName") {
               this.StrategyName1 = response.data.data;
@@ -513,7 +525,7 @@ export default {
   width: 20px;
   position: absolute;
   right: 70px;
-  top: 626px;
+  top: 624px;
   z-index: 1000000;
   cursor: pointer;
 }
@@ -535,11 +547,11 @@ export default {
   padding-top: 37px;
   padding-bottom: 37px;
 }
-.leftpbox .lbox .lb1{
-margin-top:7px;
+.leftpbox .lbox .lb1 {
+  margin-top: 7px;
 }
-.leftpbox .lbox .lb2{
-  margin-top:-16px;
+.leftpbox .lbox .lb2 {
+  margin-top: -16px;
 }
 .leftpbox .lbox img {
   width: 22px;
@@ -549,7 +561,7 @@ margin-top:7px;
   width: calc(100%-40px);
 }
 .jbox {
-  margin-top: 51px;
+  margin-top: 31px;
   margin-left: 58px;
   width: 500px;
 }
@@ -575,12 +587,12 @@ margin-top:7px;
   float: left;
   height: 25px;
   line-height: 25px;
-  width: 100px;
+  width: 120px;
 }
 .xbox {
   float: right;
   margin-right: 112px;
-  margin-top:50px;
+  margin-top: 50px;
 }
 .xbox .img {
   float: left;
@@ -597,15 +609,15 @@ margin-top:7px;
 }
 .tableheight {
   background-color: transparent;
-  border-left: 6px solid #7a7a7a!important;
-  border-right: 6px solid #7a7a7a!important;
+  border-left: 6px solid #7a7a7a !important;
+  border-right: 6px solid #7a7a7a !important;
   height: 100%;
   box-sizing: border-box;
 }
 </style>
 <style>
-.cxx .el-table__body-wrapper{
-  border:1px solid #ededed;
+.cxx .el-table__body-wrapper {
+  border: 1px solid #ededed;
   box-sizing: border-box;
 }
 .jbox .j1 .el-input {

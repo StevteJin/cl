@@ -98,13 +98,13 @@
         <!-- <el-table-column align="right">
           <template slot="header">
             <el-select v-model="value1" style="width:20%;" filterable clearable placeholder="策略名称">
-              <el-option v-for="(item,index) in StrategyName1" :key="index" :value="item.value"></el-option>
+              <el-option v-for="(item,index) in StrategyName1" :key="index" :label="item.v" :value="item.k"></el-option>
             </el-select>
             <el-select v-model="value2" style="width:18%;" filterable clearable placeholder="策略ID">
-              <el-option v-for="(item,index) in StrategyID1" :key="index" :value="item.value"></el-option>
+              <el-option v-for="(item,index) in StrategyID1" :key="index" :label="item.v" :value="item.k"></el-option>
             </el-select>
             <el-select v-model="value3" style="width:20%;" filterable clearable placeholder="事件类型">
-              <el-option v-for="(item,index) in EventType1" :key="index" :label="item.value" :value="item.key"></el-option>
+              <el-option v-for="(item,index) in EventType1" :key="index" :label="item.v" :value="item.k"></el-option>
             </el-select>
             <el-date-picker v-model="value4" type="datetime" placeholder="发生时间" style="width:23%;"></el-date-picker>
             <el-button @click="search">搜索</el-button>
@@ -520,16 +520,14 @@ export default {
     },
     getEventType: function(type) {
       this.axios
-        .post("/three/search/field", {
-          BrokerID: this.BrokerID,
-          UserAccountID: this.UserAccountID,
-          SearchField: type
+        .post("/api.v1/strategy/search", {
+          field: type
         })
         .then(response => {
-          if (response.data.code == 1) {
+          if (response.data.code == 0) {
             if (type == "EventType") {
               this.EventType1 = response.data.data;
-              console.log("类型", this.EventType1.constructor == Array);
+              console.log('我我我',this.EventType1);
               // console.log("事件类型", typeof(this.EventType1));
             } else if (type == "StrategyName") {
               this.StrategyName1 = response.data.data;
