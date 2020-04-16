@@ -11,7 +11,7 @@ import router from './router'
 //设置请求超时时间，现在，在超时前，所有请求都会等待 2.5 秒
 axios.defaults.timeout = 5000;
 //设置接口的域名
-let burl='http://47.102.151.13:8198/';
+let burl = 'http://47.102.151.13:8198/';
 // let burl='http://10.131.4.184:8198/';
 axios.defaults.baseURL = burl;
 
@@ -21,9 +21,9 @@ console.log('axios', axios.defaults.baseURL)
 axios.interceptors.request.use(
     config => {
         //如果存在token,请求头里面设置
-        var token=localStorage.getItem("token");
+        var token = localStorage.getItem("token");
         if (token) {
-            config.headers.Authorization ='Bearer '+ token;
+            config.headers.Authorization = 'Bearer ' + token;
         }
         config.baseURL = burl;
         return config;
@@ -35,8 +35,15 @@ axios.interceptors.request.use(
 // 添加请求拦截器
 axios.interceptors.response.use(
     response => {
-        //console.log(JSON.stringify(response))
-        return response;
+        if (response.data.code == -401) {
+            router.replace({
+                path: 'login',
+                query: { redirect: router.currentRoute.fullPath }
+            });
+            return;
+        } else {
+            return response;
+        }
     },
     error => {
         console.log(error.response.status);  // 对响应错误做点什么

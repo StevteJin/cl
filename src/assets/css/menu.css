@@ -4,6 +4,7 @@
     background: rgba(36, 36, 36, 1);
     overflow: hidden;
     float: left;
+    border-top:6px solid #7A7A7A;
 }
 
 .topbox {
@@ -32,7 +33,7 @@
 
 .topbox .rightname {
     float: left;
-    margin-left:4px;
+    margin-left:26px;
     overflow: hidden;
     margin-top:36px;
 }

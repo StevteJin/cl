@@ -4,33 +4,6 @@
       <Menu v-if="$route.name != 'login'"></Menu>
       <router-view></router-view>
     </div>
-    <!-- <button @click="autoUpdate()">获取更新</button>
-    <ol id="content">
-        <li>生命周期过程展示</li>
-    </ol> -->
-    <div class="mask" v-if="Expire_Day">
-      <el-dialog title="提示" :visible.sync="Expire_Day" center :modal="false" custom-class="reset-dialog account-deposit-dialog">
-        <div class="reset-dialog-content">您的系统服务期将在{{Expire_Day}}天后到期，请您尽快续费</div>
-        <div slot="footer" class="dialog-footer">
-          <el-button type="primary" @click="noShow">确 定</el-button>
-          <el-button>
-            <a href="tencent://message/?uin=1984856434" style="color:#fff;">续订服务</a>
-          </el-button>
-        </div>
-      </el-dialog>
-    </div>
-    <div class="mask" v-if="traffic_lack">
-      <el-dialog title="流量费预警" :visible.sync="traffic_lack" center :modal="false" custom-class="reset-dialog account-deposit-dialog traffic-lack-dialog">
-        <div class="reset-dialog-content">
-          <div>尊敬的客户您好，您的流量费将要耗尽，</div>
-          <div>请立即进行补足。如未按时补足，</div>
-          <div>我司将对您的持仓进行平仓处理。</div>
-        </div>
-        <div slot="footer" class="dialog-footer">
-          <el-button @click="traffic_lack = false">确定</el-button>
-        </div>
-      </el-dialog>
-    </div>
   </div>
 </template>
 

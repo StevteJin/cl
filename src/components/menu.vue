@@ -12,7 +12,7 @@
         <el-col>
           <el-menu :default-active="index" class="el-menu-vertical-demo" @open="handleOpen" @close="handleClose">
             <el-menu-item index="1" @click="routepath1">
-              <span slot="title">交易账号绑定</span>
+              <span slot="title">交易账号</span>
             </el-menu-item>
             <el-menu-item index="2" @click="routepath2">
               <span slot="title">策略交易</span>

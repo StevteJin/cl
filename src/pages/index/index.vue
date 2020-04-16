@@ -2,8 +2,8 @@
   <div class="container">
     <div class="leftpbox">
       <div class="lbox">
-        <img src="../../assets/top.png" alt="">
-        <img src="../../assets/bottom.png" alt="">
+        <img src="../../assets/top.png" alt="" class="lb1">
+        <img src="../../assets/bottom.png" alt="" class="lb2">
       </div>
       <div class="rbox">
         <div class="tbox">
@@ -194,16 +194,22 @@ export default {
   overflow: hidden;
 }
 .leftpbox {
-  border: 2px solid #7a7a7a;
+  border: 6px solid #7a7a7a;
   overflow: hidden;
 }
 .leftpbox .lbox {
   float: left;
-  border-right: 2px solid #7a7a7a;
+  border-right: 6px solid #7a7a7a;
   padding-left: 10px;
   padding-right: 10px;
   padding-top: 37px;
   padding-bottom: 37px;
+}
+.leftpbox .lbox .lb1{
+margin-top:7px;
+}
+.leftpbox .lbox .lb2{
+  margin-top:-16px;
 }
 .leftpbox .lbox img {
   width: 22px;

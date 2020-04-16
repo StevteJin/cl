@@ -1,7 +1,7 @@
 <template>
   <!--0股票1期货-->
-  <div class="container">
-    <div class="template-top">
+  <div class="container cboder">
+    <div class="template-top template-top3">
       <div class="title">
         <span @click="type0" :class="{topactive:typetype==0}">证券账号绑定</span>
         <span @click="type1" :class="{topactive:typetype==1}">期货账号绑定</span>
@@ -12,9 +12,10 @@
           <input type="text" placeholder="搜索账号名" v-model="keyword" />
           <div class="search-img" @click="search"></div>
         </div>
-        <div style="font-size:14px;color:#E46943;line-height:28px;cursor:pointer;" @click="addAgent">增加{{typetypename}}账号</div>
+        <div class="addnow" @click="addAgent">增加{{typetypename}}账号</div>
       </div>
     </div>
+    <img src="../../../assets/refr.png" alt="" :class="{'refresh-trigger': refresh,freshbtn:true}" @click="fresh">
     <el-table :border="true" :data="tableData" key="desingerTable" v-if="nullTable" stripe class="user-table" style="width: 100%;background-color:#fff;" height="774" :cell-style="cellStyle" :header-cell-style="headerCellStyle">
       <el-table-column label="交易账号" align="center"></el-table-column>
       <el-table-column label="账号名称" align="center"></el-table-column>
@@ -23,7 +24,7 @@
       <el-table-column label="账号状态" align="center"></el-table-column>
     </el-table>
     <div>
-      <el-table :border="true" :data="tableData" v-if="!nullTable" stripe class="user-table" style="width: 100%;background-color:#fff;" :cell-style="cellStyle" :header-cell-style="headerCellStyle">
+      <el-table :border="true" :data="tableData" v-if="!nullTable" stripe class="user-table" style="width: 100%;background-color:#fff;border:1px solid #ededed;" :cell-style="cellStyle" :header-cell-style="headerCellStyle" height="600">
         <el-table-column show-overflow-tooltip prop="trade_account_id" label="交易账号" align="center"></el-table-column>
         <el-table-column show-overflow-tooltip prop="user_account_name" label="账号名称" align="center"></el-table-column>
         <el-table-column show-overflow-tooltip prop="broker_id" label="机构ID" align="center"></el-table-column>
@@ -96,7 +97,8 @@ export default {
       type: "",
       ServerName: "",
       typetype: 0,
-      typetypename: "证券"
+      typetypename: "证券",
+      refresh:false
     };
   },
   computed: {
@@ -141,6 +143,9 @@ export default {
     // this.getDepotNode();
   },
   methods: {
+    fresh(){
+      this.getTellerList();
+    },
     type0() {
       this.typetype = 0;
       this.typetypename = "证券";
@@ -153,6 +158,10 @@ export default {
       this.getTellerList(this.keyword);
     },
     getTellerList(keyword) {
+      this.refresh = true;
+      setTimeout(() => {
+        this.refresh = false;
+      }, 1000);
       if (!keyword) {
         keyword = "";
       }
@@ -292,9 +301,21 @@ export default {
 .container {
   width: calc(100%-307px);
   background: #fff;
-  height: 100vh;
-  padding: 40px 36px 0;
+  padding: 45px 91px 0 57px;
+  box-sizing: border-box;
   overflow: hidden;
+}
+.freshbtn{
+  width:20px;
+  position:absolute;
+  right:120px;
+  top:230px;
+  z-index:1000000;
+  cursor: pointer;
+}
+.cboder{
+  border:6px solid #7a7a7a;
+  height: 100vh;
 }
 </style>
 

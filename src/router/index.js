@@ -33,7 +33,7 @@ const router = new Router({
     {
       path: '/tradeChannel',
       meta: {
-        title: '交易账号绑定',
+        title: '交易账号',
         requireAuth: true
       },
       component: tradeChannel

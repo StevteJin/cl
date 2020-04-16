@@ -1,9 +1,9 @@
 <template>
-  <div class="container">
+  <div class="container cxx">
     <div class="leftpbox">
       <div class="lbox">
-        <img src="../../assets/top1.png" alt="" @click="back">
-        <img src="../../assets/bottom1.png" alt="">
+        <img src="../../assets/top1.png" alt="" @click="back" class="lb1">
+        <img src="../../assets/bottom1.png" alt="" class="lb2">
       </div>
       <div class="rbox">
         <div class="jbox">
@@ -50,7 +50,7 @@
 
           </div>
         </div>
-        <div class="jbox" style="float:right;margin-top:-410px;">
+        <div class="jbox" style="float:right;margin-top:-410px;margin-right:400px;">
           <div class="jtitle">交易设置</div>
           <div class="j1">
             <div class="d1">开仓价差</div>
@@ -95,7 +95,8 @@
     </div>
     <div class="tableheight">
       <!-- <el-table v-if="EventType1.length>0&StrategyName1.length>0&StrategyID1.length>0" :data="tableData" style="width: 100%;" :height="400" :span="24" :row-style="{height:'40px'}" :header-row-style="{height:'32px'}" :cell-style="{padding:'1px'}" :span-method="objectSpanMethod"> -->
-      <el-table :data="tableData" style="width: 100%;" :height="300" :span="24" :row-style="{height:'40px'}" :header-row-style="{height:'32px'}" :cell-style="{padding:'1px'}" :span-method="objectSpanMethod">
+      <img src="../../assets/refr.png" alt="" :class="{'refresh-trigger': refresh1,freshbtn2:true}" @click="fresh1">
+      <el-table :data="tableData" stripe class="user-table" style="margin-left:57px;padding-right:45px" :height="300" :span="24" :row-style="{height:'40px'}" :header-row-style="{height:'32px'}" :span-method="objectSpanMethod" :header-cell-style="headerCellStyle" :cell-style="cellStyle">
         <el-table-column prop="strategy_name" label="策略名称" width="100"></el-table-column>
         <el-table-column prop="strategy_id" label="策略ID" width="140"></el-table-column>
         <el-table-column prop="event_type_desc" label="事件类型" width="100"></el-table-column>
@@ -202,13 +203,33 @@ export default {
       p2: "",
       p3: "",
       p4: "",
-      queryId: ""
+      queryId: "",
+      refresh1: false
     };
   },
   created() {
     this.queryId = this.$route.query.strategyId;
     this.BrokerID = this.$route.query.BrokerID;
     this.UserAccountID = this.$route.query.UserAccountID;
+  },
+  computed: {
+    headerCellStyle() {
+      return {
+        padding: "10px 0",
+        background: "#fff",
+        color: "#333333",
+        "font-size": "14px",
+        "border-right": "0px",
+        "border-left": "0px"
+      };
+    },
+    cellStyle() {
+      return {
+        "border-right": "0px",
+        color: "#333333",
+        "font-size": "12px"
+      };
+    }
   },
   watch: {
     EventType1: {
@@ -235,6 +256,9 @@ export default {
     }
   },
   methods: {
+    fresh1() {
+      this.getAccountList();
+    },
     //获取策略详情
     getAccoutContent() {
       this.axios
@@ -249,8 +273,8 @@ export default {
             this.k0 = data.trade_account_list.split(",")[0];
             this.k1 = data.trade_account_list.split(",")[1];
             let a = JSON.parse(data.python_strategy_data_config);
-            this.ka = a.contract_a;
-            this.kb = a.contract_b;
+            this.ka = data.contract_list.split(",")[0];
+            this.kb = data.contract_list.split(",")[1];
             this.p1 = a.price_diff_open;
             this.p2 = a.price_diff_close;
             this.p3 = a.trade_lots;
@@ -375,8 +399,8 @@ export default {
           //合约设置
           contracts: this.ka + "," + this.kb,
           strategy_data_config: {
-            contract_a: this.ka.split('-')[1],
-            contract_b: this.kb.split('-')[1],
+            contract_a: this.ka.split("-")[1],
+            contract_b: this.kb.split("-")[1],
             price_diff_open: this.p1,
             price_diff_close: this.p2,
             trade_lots: this.p3,
@@ -435,6 +459,10 @@ export default {
       this.getAccountList();
     },
     getAccountList() {
+      this.refresh1 = true;
+      setTimeout(() => {
+        this.refresh1 = false;
+      }, 1000);
       this.axios
         .post("/api.v1/strategy/log", {
           size: this.pageSzie,
@@ -481,6 +509,14 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
+.freshbtn2 {
+  width: 20px;
+  position: absolute;
+  right: 70px;
+  top: 626px;
+  z-index: 1000000;
+  cursor: pointer;
+}
 .container {
   width: calc(100%-307px);
   background: #fff;
@@ -488,16 +524,22 @@ export default {
   overflow: hidden;
 }
 .leftpbox {
-  border: 2px solid #7a7a7a;
+  border: 6px solid #7a7a7a;
   overflow: hidden;
 }
 .leftpbox .lbox {
   float: left;
-  border-right: 2px solid #7a7a7a;
+  border-right: 6px solid #7a7a7a;
   padding-left: 10px;
   padding-right: 10px;
   padding-top: 37px;
   padding-bottom: 37px;
+}
+.leftpbox .lbox .lb1{
+margin-top:7px;
+}
+.leftpbox .lbox .lb2{
+  margin-top:-16px;
 }
 .leftpbox .lbox img {
   width: 22px;
@@ -508,13 +550,14 @@ export default {
 }
 .jbox {
   margin-top: 51px;
-  margin-left: 106px;
+  margin-left: 58px;
   width: 500px;
 }
 .jbox .jtitle {
   border-left: 3px solid #e46943;
   width: 100px;
-  height: 16px;
+  height: 18px;
+  line-height: 18px;
   padding-left: 20px;
   font-size: 16px;
   color: #333333;
@@ -537,6 +580,7 @@ export default {
 .xbox {
   float: right;
   margin-right: 112px;
+  margin-top:50px;
 }
 .xbox .img {
   float: left;
@@ -553,9 +597,17 @@ export default {
 }
 .tableheight {
   background-color: transparent;
+  border-left: 6px solid #7a7a7a!important;
+  border-right: 6px solid #7a7a7a!important;
+  height: 100%;
+  box-sizing: border-box;
 }
 </style>
 <style>
+.cxx .el-table__body-wrapper{
+  border:1px solid #ededed;
+  box-sizing: border-box;
+}
 .jbox .j1 .el-input {
   background-color: #ededed !important;
   width: 283px;

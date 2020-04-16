@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="container cxx">
     <div class="leftpbox" v-if="row==null&!keyword">
       <div class="lbox">
         <img src="../../assets/top.png" alt="">
@@ -14,10 +14,10 @@
         </div>
       </div>
     </div>
-    <div class="leftpbox" v-if="row!=null||(row==null&keyword)">
+    <div class="leftpbox" v-if="row!=null||(row==null&keyword!='')">
       <div class="lbox">
-        <img src="../../assets/top.png" alt="">
-        <img src="../../assets/bottom.png" alt="" @click="tonew">
+        <img src="../../assets/top.png" alt="" class="lb1">
+        <img src="../../assets/bottom.png" alt="" @click="tonew" class="lb2">
       </div>
       <div class="rbox">
         <div class="template-top">
@@ -26,16 +26,18 @@
               <input type="text" placeholder="搜索策略名称" v-model="keyword" />
               <div class="search-img" @click="searchA"></div>
             </div>
-            <div style="font-size:14px;color:#E46943;line-height:28px;cursor:pointer;" @click="tonew">新建策略</div>
+            <div class="addnow" @click="tonew">新建策略</div>
           </div>
         </div>
         <div>
-          <el-table :border="true" :data="tableData1" stripe class="user-table" style="width: 100%;background-color:#fff;">
-            <el-table-column show-overflow-tooltip prop="strategy_name" label="名称" align="center"></el-table-column>
-            <el-table-column prop="strategy_type_desc" label="策略类型" width="180"></el-table-column>
-            <el-table-column show-overflow-tooltip prop="strategy_create_time" label="创建时间" align="center"></el-table-column>
-            <el-table-column show-overflow-tooltip prop="strategy_last_modify_time" label="最后修改时间" align="center"></el-table-column>
-            <el-table-column show-overflow-tooltip label="运行状态" align="center">
+          <img src="../../assets/refr.png" alt="" :class="{'refresh-trigger': refresh,freshbtn1:true}" @click="fresh">
+          <el-table :border="true" :data="tableData1" stripe class="user-table" style="width: 100%;background-color:#fff;" height='380' :header-cell-style="headerCellStyle">
+            <el-table-column show-overflow-tooltip prop="strategy_name" label="策略名称" align="center"></el-table-column>
+            <el-table-column prop="strategy_id" label="策略ID" width="140"></el-table-column>
+            <el-table-column prop="strategy_type_desc" label="策略类型"></el-table-column>
+            <el-table-column show-overflow-tooltip prop="strategy_create_time" label="创建时间" align="center" width="160"></el-table-column>
+            <el-table-column show-overflow-tooltip prop="strategy_last_modify_time" label="最后修改时间" align="center" width="160"></el-table-column>
+            <el-table-column show-overflow-tooltip label="运行状态" align="center" width="130">
               <template slot-scope="scope">
                 <div>
                   {{scope.row.strategy_status_desc}}
@@ -45,29 +47,35 @@
 
             <el-table-column show-overflow-tooltip label="操作" align="center">
               <template slot-scope="scope">
-                <div class="xxbox x2x">
-                  <div v-if="scope.row.strategy_status_desc=='已终止'">
+                <div style="padding-left:100px;">
+                  <div class="xxbox x2x">
+                    <div v-if="scope.row.strategy_status_desc=='已终止'">
+                    </div>
+                    <div v-if="scope.row.strategy_status_desc=='运行中'" @click="stop1(scope.$index, scope.row)">
+                      <img src="../../assets/xxx4.png" alt="">
+                    </div>
+                    <div v-if="scope.row.strategy_status_desc=='已暂停'" @click="start2(scope.$index, scope.row)">
+                      <img src="../../assets/xxx2.png" alt="">
+                    </div>
                   </div>
-                  <div v-if="scope.row.strategy_status_desc=='运行中'" @click="stop1(scope.$index, scope.row)">
-                    <img src="../../assets/xxx4.png" alt="">
+                  <div class="xxbox x2x">
+                    <div v-if="scope.row.strategy_status_desc=='已终止'" @click="start1(scope.$index, scope.row)">
+                      <img src="../../assets/xxx2.png" alt="">
+                    </div>
+                    <div v-if="scope.row.strategy_status_desc=='运行中'" @click="stop2(scope.$index, scope.row)">
+                      <img src="../../assets/xxx3.png" alt="">
+                    </div>
+                    <div v-if="scope.row.strategy_status_desc=='已暂停'">
+                    </div>
                   </div>
-                  <div v-if="scope.row.strategy_status_desc=='已暂停'" @click="start2(scope.$index, scope.row)">
-                    <img src="../../assets/xxx2.png" alt="">
+                  <div class="xxbox xxxbox" v-if="scope.row.strategy_status_desc=='已终止'">
+                    <div @click="change1(scope.$index, scope.row)">
+                      <img src="../../assets/1.png" alt="">
+                    </div>
+                    <div @click="delete1(scope.$index, scope.row)">
+                      <img src="../../assets/2.png" alt="">
+                    </div>
                   </div>
-                </div>
-                <div class="xxbox x2x">
-                  <div v-if="scope.row.strategy_status_desc=='已终止'" @click="start1(scope.$index, scope.row)">
-                    <img src="../../assets/xxx2.png" alt="">
-                  </div>
-                  <div v-if="scope.row.strategy_status_desc=='运行中'" @click="stop2(scope.$index, scope.row)">
-                    <img src="../../assets/xxx3.png" alt="">
-                  </div>
-                  <div v-if="scope.row.strategy_status_desc=='已暂停'">
-                  </div>
-                </div>
-                <div class="xxbox xxxbox">
-                  <div @click="change1(scope.$index, scope.row)">修改</div>
-                  <div @click="delete1(scope.$index, scope.row)">删除</div>
                 </div>
               </template>
             </el-table-column>
@@ -80,7 +88,8 @@
     </div>
     <div class="tableheight">
       <!-- <el-table v-if="EventType1.length>0&StrategyName1.length>0&StrategyID1.length>0" :data="tableData" style="width: 100%;" :height="400" :span="24" :row-style="{height:'40px'}" :header-row-style="{height:'32px'}" :cell-style="{padding:'1px'}" :span-method="objectSpanMethod"> -->
-      <el-table :data="tableData" style="width: 100%;" :height="300" :span="24" :row-style="{height:'40px'}" :header-row-style="{height:'32px'}" :cell-style="{padding:'1px'}" :span-method="objectSpanMethod">
+      <img src="../../assets/refr.png" alt="" :class="{'refresh-trigger': refresh1,freshbtn2:true}" @click="fresh1">
+      <el-table :data="tableData" stripe class="user-table" style="margin-left:57px;padding-right:45px;" :height="300" :span="24" :row-style="{height:'40px'}" :header-row-style="{height:'32px'}" :span-method="objectSpanMethod" :header-cell-style="headerCellStyle" :cell-style="cellStyle">
         <el-table-column prop="strategy_name" label="策略名称" width="100"></el-table-column>
         <el-table-column prop="strategy_id" label="策略ID" width="140"></el-table-column>
         <el-table-column prop="event_type_desc" label="事件类型" width="100"></el-table-column>
@@ -199,13 +208,34 @@ export default {
       websock: null,
       pageSzie2: 31,
       currentPage2: 1,
-      total2: 1
+      total2: 1,
+      refresh: false,
+      refresh1: false
     };
   },
   created() {
     this.initWebSocket();
     this.BrokerID = this.$route.query.BrokerID;
     this.UserAccountID = this.$route.query.UserAccountID;
+  },
+  computed: {
+    headerCellStyle() {
+      return {
+        padding: "10px 0",
+        background: "#fff",
+        color: "#333333",
+        "font-size": "14px",
+        "border-right": "0px",
+        "border-left": "0px"
+      };
+    },
+    cellStyle() {
+      return {
+        "border-right": "0px",
+        color: "#333333",
+        "font-size": "12px"
+      };
+    }
   },
   watch: {
     keyword: {
@@ -238,6 +268,12 @@ export default {
     this.websocketclose();
   },
   methods: {
+    fresh() {
+      this.getDataList();
+    },
+    fresh1() {
+      this.getAccountList();
+    },
     initWebSocket() {
       let token = localStorage.getItem("token");
       //初始化weosocket
@@ -404,6 +440,10 @@ export default {
         });
     },
     getDataList(keyword) {
+      this.refresh = true;
+      setTimeout(() => {
+        this.refresh = false;
+      }, 1000);
       if (!keyword) {
         keyword = "";
       }
@@ -454,6 +494,10 @@ export default {
       this.getAccountList();
     },
     getAccountList() {
+      this.refresh1 = true;
+      setTimeout(() => {
+        this.refresh1 = false;
+      }, 1000);
       this.axios
         .post("/api.v1/strategy/log", {
           size: this.pageSzie2,
@@ -512,16 +556,22 @@ export default {
   overflow: hidden;
 }
 .leftpbox {
-  border: 2px solid #7a7a7a;
+  border: 6px solid #7a7a7a;
   overflow: hidden;
 }
 .leftpbox .lbox {
   float: left;
-  border-right: 2px solid #7a7a7a;
+  border-right: 6px solid #7a7a7a;
   padding-left: 10px;
   padding-right: 10px;
   padding-top: 37px;
   padding-bottom: 37px;
+}
+.leftpbox .lbox .lb1{
+margin-top:7px;
+}
+.leftpbox .lbox .lb2{
+  margin-top:-16px;
 }
 .leftpbox .lbox img {
   width: 22px;
@@ -572,17 +622,17 @@ export default {
   width: 20px;
 }
 .leftpbox .rbox .x2x:first-child {
-  margin-left: 50px;
 }
 .leftpbox .rbox .xxbox * {
   vertical-align: middle;
 }
-.leftpbox .rbox .xxxbox *:first-child {
-  margin-left: 46px;
+.leftpbox .rbox .xxxbox {
+  float: right;
+  margin-right:40px;
 }
 .leftpbox .rbox .xxxbox * {
   float: left;
-  margin-right: 20px;
+  margin-right:10px;
   cursor: pointer;
 }
 .leftpbox .rbox .xxbox img {
@@ -624,9 +674,33 @@ export default {
 }
 .tableheight {
   background-color: transparent;
+  border-left:6px solid #7a7a7a;
+  border-right:6px solid #7a7a7a;
+  height:100%;
+}
+
+.freshbtn1 {
+  width: 20px;
+  position: absolute;
+  right: 70px;
+  top: 170px;
+  z-index: 1000000;
+  cursor: pointer;
+}
+.freshbtn2 {
+  width: 20px;
+  position: absolute;
+  right: 70px;
+  top: 626px;
+  z-index: 1000000;
+  cursor: pointer;
 }
 </style>
 <style>
+.cxx .el-table__body-wrapper{
+  border:1px solid #ededed;
+  box-sizing: border-box;
+}
 .jbox .j1 .el-input {
   background-color: #ededed !important;
   width: 283px;

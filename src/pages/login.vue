@@ -7,7 +7,7 @@
           <img src="../assets/slogo.png" alt="">
           <div>
             <span class="d1">金汇策略交易系统</span>
-            <span>JIN HUI Strategic trading system</span>
+            <span>JIN HUI STRATEGIC TRDING SYSTEM</span>
           </div>
         </div>
         <div style="display: none">
@@ -18,18 +18,18 @@
           <div class="bt2box"></div>
           <div class="bt1box">
             <div class="msgbox">
-              <img src="../assets/loginimg/username.png" alt="">
-              <input v-model="form.username" type="text" placeholder="请输入您的账号">
+              <img src="../assets/loginimg/username1.png" alt="">
+              <input v-model="form.username" type="text" autocomplete="off" placeholder="请输入您的账号">
             </div>
             <div class="msgbox">
-              <img src="../assets/loginimg/password.png" alt="">
-              <input v-model="form.pwd" type="password" placeholder="请输入您的密码">
+              <img src="../assets/loginimg/password1.png" alt="">
+              <input v-model="form.pwd" type="password" autocomplete="off" placeholder="请输入您的密码">
             </div>
             <div class="errorbox" v-if="errMsg">
               <img src="../assets/loginimg/error.png" alt="">
               <div>{{errMsg}}</div>
             </div>
-            <div :class="{loginbtn:true,loginbtn1:!errMsg}" @click="login">登录</div>
+            <div :class="{loginbtn:true,loginbtn1:!errMsg}" @click="login">登 &nbsp;&nbsp;录</div>
           </div>
         </div>
       </div>
@@ -131,6 +131,7 @@ export default {
 .logintitle img {
   width: 63px;
   float: left;
+  margin-right:10px;
 }
 .logintitle div {
   float: left;
@@ -146,6 +147,7 @@ export default {
 .logintitle div .d1 {
   font-size: 22px;
   color: #fff;
+  margin-bottom:5px;
 }
 .loginbox .btbox {
   width: 405px;
@@ -182,6 +184,10 @@ export default {
   box-sizing: border-box;
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
+.loginbox .msgbox:first-child{
+  margin-top:-10px;
+  margin-bottom:18px;
+}
 .loginbox .msgbox img {
   width: 13px;
   height: 14px;
@@ -202,7 +208,7 @@ export default {
   padding-left: 10px;
   background-color: transparent;
   color: #ffffff;
-  font-size: 12px;
+  font-size: 14px;
   line-height: 33px;
   outline: none;
 }
