@@ -47,7 +47,7 @@
 
             <el-table-column show-overflow-tooltip label="操作" align="center">
               <template slot-scope="scope">
-                <div style="padding-left:100px;">
+                <div style="padding-left:90px;">
                   <div class="xxbox x2x">
                     <div v-if="scope.row.strategy_status_desc=='已终止'">
                     </div>
@@ -68,13 +68,14 @@
                     <div v-if="scope.row.strategy_status_desc=='已暂停'">
                     </div>
                   </div>
-                  <div class="xxbox xxxbox" v-if="scope.row.strategy_status_desc=='已终止'">
-                    <div @click="change1(scope.$index, scope.row)">
+                  <div class="xxbox xxxbox">
+                    <div @click="change1(scope.$index, scope.row)" v-if="scope.row.strategy_status_desc=='已终止'">
                       <img src="../../assets/1.png" alt="">
                     </div>
-                    <div @click="delete1(scope.$index, scope.row)">
+                    <div @click="delete1(scope.$index, scope.row)" v-if="scope.row.strategy_status_desc=='已终止'">
                       <img src="../../assets/2.png" alt="">
                     </div>
+                    <div @click="change1(scope.$index, scope.row,'detail')">详情</div>
                   </div>
                 </div>
               </template>
@@ -414,12 +415,16 @@ export default {
       this.doOpe(this.strategy_id, this.operate_type);
     },
     //修改
-    change1(index, row) {
+    change1(index, row,detail) {
+      if(!detail){
+        detail=''
+      }
       this.strategy_id = row.strategy_id;
       this.$router.push({
         path: "index2",
         query: {
-          strategyId: this.strategy_id
+          strategyId: this.strategy_id,
+          detail:detail
         }
       });
     },

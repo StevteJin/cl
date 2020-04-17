@@ -27,6 +27,7 @@
       <el-table :border="true" :data="tableData" v-if="!nullTable" stripe class="user-table" style="width: 100%;background-color:#fff;border:1px solid #ededed;" :cell-style="cellStyle" :header-cell-style="headerCellStyle" height="600">
         <el-table-column show-overflow-tooltip prop="trade_account_id" label="交易账号" align="center"></el-table-column>
         <el-table-column show-overflow-tooltip prop="user_account_name" label="账号名称" align="center"></el-table-column>
+        <el-table-column show-overflow-tooltip prop="fund_account_id" label="主账号" align="center" v-if="typetypename=='证券'"></el-table-column>
         <el-table-column show-overflow-tooltip prop="broker_id" label="机构ID" align="center"></el-table-column>
         <el-table-column show-overflow-tooltip prop="type_desc" label="账号类型" align="center"></el-table-column>
         <el-table-column show-overflow-tooltip prop="status_desc" label="账号状态" align="center"></el-table-column>
@@ -53,6 +54,9 @@
               </el-form-item>
               <el-form-item label="机构ID:">
                 <el-input v-model="formInline.Port"></el-input>
+              </el-form-item>
+              <el-form-item label="主账号:" v-if="typetypename=='证券'">
+                <el-input v-model="formInline.ID"></el-input>
               </el-form-item>
             </div>
           </div>
@@ -87,7 +91,8 @@ export default {
       formInline: {
         IP: "",
         Port: "",
-        Remark: ""
+        Remark: "",
+        ID:""
       },
       addDialogVisible: false,
       resetDialogVisible: false,
@@ -231,6 +236,7 @@ export default {
             trade_account_id: this.ServerName,
             password: this.formInline.IP,
             broker_id: this.formInline.Port,
+            fund_account_id:this.formInline.ID,
             type: this.typetype
           })
           .then(res => {

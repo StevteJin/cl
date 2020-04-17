@@ -10,11 +10,11 @@
           <div class="jtitle">基础设置</div>
           <div class="j1">
             <div class="d1">策略名称</div>
-            <el-input v-model="strategy_name"></el-input>
+            <el-input v-model="strategy_name" :disabled="detail!=''"></el-input>
           </div>
           <div class="j1">
             <div class="d1">策略模板</div>
-            <el-select v-model="strategy_type" style="width:20%;" filterable clearable placeholder="策略模板">
+            <el-select v-model="strategy_type" style="width:20%;" filterable clearable placeholder="策略模板" :disabled="detail!=''">
               <el-option v-for="(item,index) in aKList" :key="index" :label="item.v" :value="item.k"></el-option>
             </el-select>
           </div>
@@ -23,13 +23,13 @@
           <div class="jtitle">账号设置</div>
           <div class="j1">
             <div class="d1">证券交易账号</div>
-            <el-select v-model="k0" style="width:20%;" filterable clearable placeholder="证券交易账号">
+            <el-select v-model="k0" style="width:20%;" filterable clearable placeholder="证券交易账号" :disabled="detail!=''">
               <el-option v-for="(item,index) in accountList0" :key="index" :label="item.v" :value="item.k"></el-option>
             </el-select>
           </div>
           <div class="j1">
             <div class="d1">期货交易账号</div>
-            <el-select v-model="k1" style="width:20%;" filterable clearable placeholder="期货交易账号">
+            <el-select v-model="k1" style="width:20%;" filterable clearable placeholder="期货交易账号" :disabled="detail!=''">
               <el-option v-for="(item,index) in accountList1" :key="index" :label="item.v" :value="item.k"></el-option>
             </el-select>
           </div>
@@ -38,21 +38,21 @@
           <div class="jtitle">合约设置</div>
           <div class="j1">
             <div class="d1">合约A</div>
-            <el-select v-model="ka" style="width:20%;" filterable remote :remote-method="remoteMethodb" clearable placeholder="请输入证券合约">
+            <el-select v-model="ka" style="width:20%;" filterable remote :remote-method="remoteMethodb" clearable placeholder="请输入证券合约" :disabled="detail!=''">
               <el-option v-for="(item,index) in bList" :key="index" :label="item.v" :value="item.k"></el-option>
             </el-select>
           </div>
           <div class="j1" style="margin-top:-1px;">
             <div class="d1">合约A价格放大倍数</div>
-            <el-input v-model="a2"></el-input>
+            <el-input v-model="a2" :disabled="detail!=''"></el-input>
           </div>
           <div class="j1">
             <div class="d1">合约A报单每手乘数</div>
-            <el-input v-model="a1"></el-input>
+            <el-input v-model="a1" :disabled="detail!=''"></el-input>
           </div>
           <div class="j1">
             <div class="d1">合约B</div>
-            <el-select v-model="kb" style="width:20%;" filterable remote :remote-method="remoteMethoda" clearable placeholder="请输入期货合约">
+            <el-select v-model="kb" style="width:20%;" filterable remote :remote-method="remoteMethoda" clearable placeholder="请输入期货合约" :disabled="detail!=''">
               <el-option v-for="(item,index) in aList" :key="index" :label="item.v" :value="item.k"></el-option>
             </el-select>
 
@@ -62,22 +62,22 @@
           <div class="jtitle">交易设置</div>
           <div class="j1">
             <div class="d1">开仓价差</div>
-            <el-input v-model="p1"></el-input>
+            <el-input v-model="p1" :disabled="detail!=''"></el-input>
             <span style="line-height:18px;">&nbsp;元</span>
           </div>
           <div class="j1">
             <div class="d1">平仓价差</div>
-            <el-input v-model="p2"></el-input>
+            <el-input v-model="p2" :disabled="detail!=''"></el-input>
             <span style="line-height:18px;">&nbsp;元</span>
           </div>
           <div class="j1">
             <div class="d1">每次交易对数</div>
-            <el-input v-model="p3"></el-input>
+            <el-input v-model="p3" :disabled="detail!=''"></el-input>
             <span style="line-height:18px;">&nbsp;对</span>
           </div>
           <div class="j1">
             <div class="d1">最大持仓对数</div>
-            <el-input v-model="p4"></el-input>
+            <el-input v-model="p4" :disabled="detail!=''"></el-input>
             <span style="line-height:18px;">&nbsp;对</span>
           </div>
         </div>
@@ -86,15 +86,15 @@
             <img src="../../assets/x1.png" alt="">
             <div>返回</div>
           </div>
-          <div class="img" @click="resetList">
+          <div class="img" @click="resetList" v-if="detail==''">
             <img src="../../assets/x2.png" alt="">
             <div>重置</div>
           </div>
-          <div class="img" @click="addNewList(5)" v-if="!queryId">
+          <div class="img" @click="addNewList(5)" v-if="!queryId&&detail==''">
             <img src="../../assets/x3.png" alt="">
             <div>保存</div>
           </div>
-          <div class="img" @click="editNewList" v-if="queryId">
+          <div class="img" @click="editNewList" v-if="queryId&&detail==''">
             <img src="../../assets/x4.png" alt="">
             <div>修改</div>
           </div>
@@ -214,13 +214,15 @@ export default {
       p3: "",
       p4: "",
       queryId: "",
-      refresh1: false
+      refresh1: false,
+      detail:''
     };
   },
   created() {
     this.queryId = this.$route.query.strategyId;
     this.BrokerID = this.$route.query.BrokerID;
     this.UserAccountID = this.$route.query.UserAccountID;
+    this.detail=this.$route.query.detail||'';
   },
   computed: {
     headerCellStyle() {
