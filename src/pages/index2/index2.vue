@@ -101,85 +101,21 @@
         </div>
       </div>
     </div>
-    <div class="tableheight">
-      <!-- <el-table v-if="EventType1.length>0&StrategyName1.length>0&StrategyID1.length>0" :data="tableData" style="width: 100%;" :height="400" :span="24" :row-style="{height:'40px'}" :header-row-style="{height:'32px'}" :cell-style="{padding:'1px'}" :span-method="objectSpanMethod"> -->
-      <img src="../../assets/refr.png" alt="" :class="{'refresh-trigger': refresh1,freshbtn2:true}" @click="fresh1">
-      <el-table :data="tableData" stripe class="user-table" style="margin-left:57px;padding-right:45px" :height="300" :span="24" :row-style="{height:'40px'}" :header-row-style="{height:'32px'}" :span-method="objectSpanMethod" :header-cell-style="headerCellStyle" :cell-style="cellStyle">
-        <el-table-column prop="strategy_name" label="策略名称" width="100"></el-table-column>
-        <el-table-column prop="strategy_id" label="策略ID" width="140"></el-table-column>
-        <el-table-column prop="event_type_desc" label="事件类型" width="100"></el-table-column>
-        <el-table-column prop="event_time" label="发生时间" width="180"></el-table-column>
-        <el-table-column prop="event_detail" label="事件详情" ></el-table-column>
-        <!-- <el-table-column align="right">
-          <template slot="header">
-            <el-select v-model="value1" style="width:20%;" filterable clearable placeholder="策略名称">
-              <el-option v-for="(item,index) in StrategyName1" :key="index" :label="item.v" :value="item.k"></el-option>
-            </el-select>
-            <el-select v-model="value2" style="width:18%;" filterable clearable placeholder="策略ID">
-              <el-option v-for="(item,index) in StrategyID1" :key="index" :label="item.v" :value="item.k"></el-option>
-            </el-select>
-            <el-select v-model="value3" style="width:20%;" filterable clearable placeholder="事件类型">
-              <el-option v-for="(item,index) in EventType1" :key="index" :label="item.v" :value="item.k"></el-option>
-            </el-select>
-            <el-date-picker v-model="value4" type="datetime" placeholder="发生时间" style="width:23%;"></el-date-picker>
-            <el-button @click="search">搜索</el-button>
-          </template>
-        </el-table-column> -->
-      </el-table>
-      <div class="pagination">
-        <el-pagination :current-page.sync="currentPage" layout="prev, pager, next" :page-size="pageSzie" :pager-count="5" :total="total" @current-change="handleCurrentChange"></el-pagination>
-      </div>
-    </div>
+    <sameTable></sameTable>
   </div>
 </template>
 
 <script>
+import sameTable from "@/components/sameTable";
 export default {
+  components: {
+    sameTable
+  },
   data() {
     return {
-      tableData: [
-        {
-          date: "2016-05-02",
-          name: "超级11多",
-          address: "1211080221",
-          type: "启动",
-          content: "开仓231"
-        },
-        {
-          date: "2016-05-04",
-          name: "超级22多",
-          address: "1211080221",
-          type: "开仓",
-          content: "开仓231"
-        },
-        {
-          date: "2016-05-01",
-          name: "超级33多",
-          address: "1211080221",
-          type: "开仓",
-          content: "开仓231"
-        },
-        {
-          date: "2016-05-03",
-          name: "超级44多",
-          address: "1211080221",
-          type: "启动",
-          content: "开仓231"
-        }
-      ],
-      value1: "",
-      value2: "",
-      value3: "",
-      value4: "",
       EventType1: [],
       StrategyName1: [],
       StrategyID1: [],
-      pageSzie: 20,
-      currentPage: 1,
-      total: 0,
-      BrokerID: "",
-      UserAccountID: "",
-      cl: [{ key: 1, value: 1 }, { key: 2, value: 2 }],
       //交易账号列表
       accountList0: [],
       accountList1: [],
@@ -214,14 +150,11 @@ export default {
       p3: "",
       p4: "",
       queryId: "",
-      refresh1: false,
-      detail:''
+      refresh1: false
     };
   },
   created() {
     this.queryId = this.$route.query.strategyId;
-    this.BrokerID = this.$route.query.BrokerID;
-    this.UserAccountID = this.$route.query.UserAccountID;
     this.detail=this.$route.query.detail||'';
   },
   computed: {
@@ -252,11 +185,6 @@ export default {
     }
   },
   mounted() {
-    //EventType这是事件类型，StrategyID策略id，StrategyName策略名称，对哇
-    this.getEventType("EventType");
-    this.getEventType("StrategyName");
-    this.getEventType("StrategyID");
-    this.getAccountList();
     //获取交易账号列表
     //0期货，1证券
     this.getAccout(0);
@@ -268,9 +196,6 @@ export default {
     }
   },
   methods: {
-    fresh1() {
-      this.getAccountList();
-    },
     //获取策略详情
     getAccoutContent() {
       this.axios
@@ -339,14 +264,6 @@ export default {
     },
     remoteMethoda(query) {
       if (query !== "") {
-        // this.loading = true;
-        // setTimeout(() => {
-        //   this.loading = false;
-        //   this.options = this.list.filter(item => {
-        //     return item.label.toLowerCase()
-        //       .indexOf(query.toLowerCase()) > -1;
-        //   });
-        // }, 200);
         //合约设置
         this.getAbList("1", query);
       } else {
@@ -355,14 +272,6 @@ export default {
     },
     remoteMethodb(query) {
       if (query !== "") {
-        // this.loading = true;
-        // setTimeout(() => {
-        //   this.loading = false;
-        //   this.options = this.list.filter(item => {
-        //     return item.label.toLowerCase()
-        //       .indexOf(query.toLowerCase()) > -1;
-        //   });
-        // }, 200);
         //合约设置
         this.getAbList("0", query);
       } else {
@@ -457,80 +366,11 @@ export default {
       this.$router.push({
         path: "index3"
       });
-    },
-    //当前行row、当前列column、当前行号rowIndex、当前列号columnIndex
-    objectSpanMethod({ row, column, rowIndex, columnIndex }) {
-      if (columnIndex == 4) {
-        return [1, 2];
-      }
-    },
-    formatter(row, column) {
-      return row.address;
-    },
-    handleCurrentChange(val) {
-      this.currentPage = val;
-      this.getAccountList();
-    },
-    search() {
-      this.getAccountList();
-    },
-    getAccountList() {
-      this.refresh1 = true;
-      setTimeout(() => {
-        this.refresh1 = false;
-      }, 1000);
-      this.axios
-        .post("/api.v1/strategy/log", {
-          size: this.pageSzie,
-          page: this.currentPage
-        })
-        .then(response => {
-          if (response.data.code == 0) {
-            this.tableData = response.data.data.rows;
-            this.total = response.data.data.total;
-          }
-        })
-        .catch(err => {
-          console.log(err);
-        });
-    },
-    getEventType: function(type) {
-      this.axios
-        .post("/api.v1/strategy/search", {
-          field: type
-        })
-        .then(response => {
-          if (response.data.code == 0) {
-            if (type == "EventType") {
-              this.EventType1 = response.data.data;
-              console.log('777',this.EventType1)
-              // console.log("事件类型", typeof(this.EventType1));
-            } else if (type == "StrategyName") {
-              this.StrategyName1 = response.data.data;
-              // console.log("策略名称", this.StrategyName);
-            } else if (type == "StrategyID") {
-              this.StrategyID1 = response.data.data;
-              // console.log("策略ID", this.StrategyID);
-            }
-            this.$forceUpdate();
-          }
-        })
-        .catch(function(error) {
-          console.log(error);
-        });
     }
   }
 };
 </script>
 <style lang="scss" scoped>
-.freshbtn2 {
-  width: 20px;
-  position: absolute;
-  right: 70px;
-  top: 624px;
-  z-index: 1000000;
-  cursor: pointer;
-}
 .container {
   width: calc(100%-307px);
   background: #fff;
@@ -630,33 +470,6 @@ export default {
 }
 .jbox .j1 .el-input .el-input__inner {
   background-color: #ededed !important;
-}
-.tableheight * {
-  color: rgb(68, 71, 80) !important;
-  font-size: 12px;
-}
-.tableheight .el-input__inner {
-  height: 26px !important;
-  line-height: 26px !important;
-}
-.tableheight .el-input__inner::placeholder {
-  color: rgb(68, 71, 80) !important;
-}
-.tableheight .el-select .el-input .el-select__caret {
-  margin-top: 8px !important;
-}
-.tableheight .el-select .el-input .el-select__caret.is-reverse {
-  margin-top: -8px !important;
-}
-.tableheight .el-button {
-  height: 26px !important;
-  line-height: 1px !important;
-}
-.tableheight .el-icon-time {
-  margin-top: -6px !important;
-}
-.tableheight .el-table__body-wrapper {
-  background-color: #fff !important;
 }
 .el-picker-panel {
   line-height: 12px !important;
