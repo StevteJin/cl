@@ -8,22 +8,22 @@
             <el-table-column prop="strategy_id" label="策略ID" width="140"></el-table-column>
             <el-table-column prop="event_type_desc" label="事件类型" width="100"></el-table-column>
             <el-table-column prop="event_time" label="发生时间" width="180"></el-table-column>
-            <el-table-column prop="event_detail" label="事件详情"></el-table-column>
-            <!-- <el-table-column align="right">
-          <template slot="header">
-            <el-select v-model="value1" style="width:20%;" filterable clearable placeholder="策略名称">
-              <el-option v-for="(item,index) in StrategyName1" :key="index" :label="item.v" :value="item.k"></el-option>
-            </el-select>
-            <el-select v-model="value2" style="width:18%;" filterable clearable placeholder="策略ID">
-              <el-option v-for="(item,index) in StrategyID1" :key="index" :label="item.v" :value="item.k"></el-option>
-            </el-select>
-            <el-select v-model="value3" style="width:20%;" filterable clearable placeholder="事件类型">
-              <el-option v-for="(item,index) in EventType1" :key="index" :label="item.v" :value="item.k"></el-option>
-            </el-select>
-            <el-date-picker v-model="value4" type="datetime" placeholder="发生时间" style="width:23%;"></el-date-picker>
-            <el-button @click="search">搜索</el-button>
-          </template>
-        </el-table-column> -->
+            <el-table-column prop="event_detail" label="事件详情" width="280"></el-table-column>
+            <el-table-column align="right">
+                <template slot="header" slot-scope="scope">
+                    <el-select v-model="value1" style="width:20%;" filterable clearable placeholder="策略名称">
+                        <el-option v-for="(item,index) in StrategyName1" :key="index" :label="item.v" :value="item.k"></el-option>
+                    </el-select>
+                    <el-select v-model="value2" style="width:18%;" filterable clearable placeholder="策略ID">
+                        <el-option v-for="(item,index) in StrategyID1" :key="index" :label="item.v" :value="item.k"></el-option>
+                    </el-select>
+                    <el-select v-model="value3" style="width:20%;" filterable clearable placeholder="事件类型">
+                        <el-option v-for="(item,index) in EventType1" :key="index" :label="item.v" :value="item.k"></el-option>
+                    </el-select>
+                    <el-date-picker v-model="value4" type="datetime" placeholder="发生时间" style="width:20%;"></el-date-picker>
+                    <el-button @click="search">搜索</el-button>
+                </template>
+            </el-table-column>
         </el-table>
         <div class="pagination">
             <el-pagination :current-page.sync="currentPage2" layout="prev, pager, next" :page-size="pageSzie2" :pager-count="5" :total="totalNew" @current-change="handleCurrentChange2"></el-pagination>
@@ -42,7 +42,14 @@ export default {
       totalNew: 1,
       refreshNew: false,
       EventType1: [],
-      freshBeel: false
+      freshBeel: false,
+      value1: "",
+      value2: "",
+      value3: "",
+      value4: "",
+      EventType1: [],
+      StrategyName1: [],
+      StrategyID1: []
     };
   },
   computed: {
@@ -102,16 +109,27 @@ export default {
       this.currentPage2 = val;
       this.getAccountListNew();
     },
+    search() {
+      this.getAccountListNew();
+    },
     getAccountListNew() {
       this.refreshNew = true;
       this.axios
         .post("/api.v1/strategy/log", {
           size: this.pageSzie2,
-          page: this.currentPage2
-          // EventType: this.value3,
-          // StrategyName: this.value1,
-          // StrategyID: this.value2,
-          // StartTime: this.value4
+          page: this.currentPage2,
+          filter: {
+            EventType: this.value3,
+            StrategyName: this.value1,
+            StrategyID: this.value2,
+            EventTime: this.value4
+          },
+          option: {
+            EventType: "LIKE",
+            StrategyName: "LIKE",
+            StrategyID: "LIKE",
+            EventTime: "<="
+          }
         })
         .then(response => {
           if (response.data.code == 0) {
@@ -192,7 +210,7 @@ export default {
   color: rgb(68, 71, 80) !important;
   font-size: 12px;
 }
-.tableheight .el-input__inner {
+/* .tableheight .el-input__inner {
   height: 26px !important;
   line-height: 26px !important;
 }
@@ -204,15 +222,20 @@ export default {
 }
 .tableheight .el-select .el-input .el-select__caret.is-reverse {
   margin-top: -8px !important;
-}
+} */
 .tableheight .el-button {
   height: 26px !important;
   line-height: 1px !important;
+  margin-right: 70px !important;
+  padding-left: 10px !important;
+  padding-right: 10px !important;
+  position: relative;
+  top: -20px;
 }
-.tableheight .el-icon-time {
+/* .tableheight .el-icon-time {
   margin-top: -6px !important;
 }
 .tableheight .el-table__body-wrapper {
   background-color: #fff !important;
-}
+} */
 </style>
