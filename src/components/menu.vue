@@ -17,6 +17,12 @@
             <el-menu-item index="2" @click="routepath2">
               <span slot="title">策略交易</span>
             </el-menu-item>
+            <el-menu-item index="4" @click="routepath4">
+              <span slot="title">委托查询</span>
+            </el-menu-item>
+            <el-menu-item index="5" @click="routepath5">
+              <span slot="title">成交查询</span>
+            </el-menu-item>
           </el-menu>
         </el-col>
       </el-row>
@@ -68,6 +74,16 @@ export default {
     routepath2() {
       this.$router.push({
         path: "index3"
+      });
+    },
+    routepath4() {
+      this.$router.push({
+        path: "index4"
+      });
+    },
+    routepath5() {
+      this.$router.push({
+        path: "index5"
       });
     },
     loginout() {

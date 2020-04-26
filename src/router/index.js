@@ -10,6 +10,11 @@ import index from '@/pages/index/index'
 import index2 from '@/pages/index2/index2'
 //新策略
 import index3 from '@/pages/index3/index3'
+//策略
+import index4 from '@/components/sameTable'
+//策略
+import index5 from '@/components/sameTable'
+
 Vue.use(Router)
 
 const router = new Router({
@@ -61,15 +66,31 @@ const router = new Router({
         requireAuth: true
       },
       component: index3
+    },
+    {
+      path: '/index4',
+      meta: {
+        title: '委托查询',
+        requireAuth: true
+      },
+      component: index4
+    },
+    {
+      path: '/index5',
+      meta: {
+        title: '成交查询',
+        requireAuth: true
+      },
+      component: index5
     }
   ]
 })
 
 router.beforeEach((to, from, next) => {
-  window.document.title = to.meta.title ;
+  window.document.title = to.meta.title;
   window.scrollTo(0, 0);
   var userName = localStorage.getItem("remenberUsername");
-  var token =  localStorage.getItem("token" );
+  var token = localStorage.getItem("token");
   if (to.meta.requireAuth) {  // 判断该路由是否需要登录权限
     if (token) {
       next();
