@@ -55,7 +55,14 @@
             <el-select v-model="kb" style="width:20%;" filterable remote :remote-method="remoteMethoda" clearable placeholder="请输入期货合约" :disabled="detail!=''">
               <el-option v-for="(item,index) in aList" :key="index" :label="item.v" :value="item.k"></el-option>
             </el-select>
-
+          </div>
+          <div class="j1" style="margin-top:-1px;">
+            <div class="d1">合约B价格放大倍数</div>
+            <el-input v-model="b2" :disabled="detail!=''"></el-input>
+          </div>
+          <div class="j1">
+            <div class="d1">合约B报单每手乘数</div>
+            <el-input v-model="b1" :disabled="detail!=''"></el-input>
           </div>
         </div>
         <div class="jbox" style="float:right;margin-top:-410px;margin-right:400px;">
@@ -145,6 +152,8 @@ export default {
       kb: "",
       a1: "",
       a2: "",
+      b1:"",
+      b2:"",
       p1: "",
       p2: "",
       p3: "",
@@ -214,6 +223,8 @@ export default {
             this.kb = data.contract_list.split(",")[1];
             this.a1 = a.multiplier_order_num_a; //报单每手乘数
             this.a2 = a.multiplier_price_a; //价格放大倍数
+            this.a1 = a.multiplier_order_num_b; //报单每手乘数
+            this.a2 = a.multiplier_price_b; //价格放大倍数
             this.p1 = a.price_diff_open; //开仓价差
             this.p2 = a.price_diff_close; //平仓价差
             this.p3 = a.trade_lots; //每次交易对数
@@ -326,6 +337,8 @@ export default {
             contract_b: this.kb.split("-")[1],
             multiplier_order_num_a: this.a1,
             multiplier_price_a: this.a2,
+            multiplier_order_num_b: this.b1,
+            multiplier_price_b: this.b2,
             price_diff_open: this.p1,
             price_diff_close: this.p2,
             trade_lots: this.p3,
@@ -403,7 +416,7 @@ export default {
   width: calc(100%-40px);
 }
 .jbox {
-  margin-top: 31px;
+  margin-top: 21px;
   margin-left: 58px;
   width: 500px;
 }
