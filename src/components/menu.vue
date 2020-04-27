@@ -51,8 +51,16 @@ export default {
     let path = this.$route.path;
     if (path == "/tradeChannel" || path == "/index") {
       this.index = "1";
-    } else {
+    } else if (path == "/index2") {
       this.index = "2";
+    } else if (path == "/index3") {
+      this.index = "3";
+    } else if (path == "/index4") {
+      this.index = "4";
+    } else if (path == "/index5") {
+      this.index = "5";
+    } else if (path == "/index6") {
+      this.index = "6";
     }
     eventBus.$on("modifyUserName", newName => {
       this.userName = newName;
