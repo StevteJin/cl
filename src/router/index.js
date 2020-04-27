@@ -14,6 +14,8 @@ import index3 from '@/pages/index3/index3'
 import index4 from '@/pages/query/query'
 //成交查询
 import index5 from '@/pages/query/query'
+//持仓查询
+import index6 from '@/pages/query/query'
 
 Vue.use(Router)
 
@@ -82,6 +84,14 @@ const router = new Router({
         requireAuth: true
       },
       component: index5
+    },
+    {
+      path: '/index6',
+      meta: {
+        title: '持仓查询',
+        requireAuth: true
+      },
+      component: index6
     }
   ]
 })

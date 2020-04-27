@@ -195,7 +195,7 @@ export default {
   },
   mounted() {
     //获取交易账号列表
-    //0期货，1证券
+    //0证券，1期货
     this.getAccout(0);
     this.getAccout(1);
     //策略模板

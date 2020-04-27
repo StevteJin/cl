@@ -43,7 +43,7 @@ export default {
       refreshNew: false,
       EventType1: [],
       freshBeel: false,
-      value1: "",
+      value1: "", 
       value2: "",
       value3: "",
       value4: "",

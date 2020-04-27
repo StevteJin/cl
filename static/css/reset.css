@@ -495,6 +495,10 @@ input:-ms-input-placeholder {
     top: 26px;
 }
 
+.query .topactive::after {
+    left: 10px;
+}
+
 .template-top .operate-btn {
     overflow: hidden;
     margin-top: 60px;

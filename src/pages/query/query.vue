@@ -9,11 +9,11 @@
         <div class="searchBox">
             <div class="leftSearch">
                 <label>当前账号</label>
-                <el-select v-model="value1" filterable clearable placeholder="当前账号">
-                    <el-option v-for="(item,index) in StrategyName1" :key="index" :label="item.v" :value="item.k"></el-option>
+                <el-select v-model="zhanghao" filterable clearable placeholder="当前账号">
+                    <el-option v-for="(item,index) in zhList" :key="index" :label="item.v" :value="item.k"></el-option>
                 </el-select>
             </div>
-            <div class="rightSearch">
+            <!-- <div class="rightSearch">
                 <el-select v-model="value1" filterable clearable placeholder="策略名称">
                     <el-option v-for="(item,index) in StrategyName1" :key="index" :label="item.v" :value="item.k"></el-option>
                 </el-select>
@@ -25,17 +25,14 @@
                 </el-select>
                 <el-date-picker v-model="value4" type="datetime" placeholder="发生时间"></el-date-picker>
                 <el-button @click="search">搜索</el-button>
-            </div>
+            </div> -->
         </div>
         <!--底部公用的策略列表-->
         <div class="tableheight">
             <img src="../../assets/refr.png" alt="" :class="{'refresh-trigger': refreshNew,freshbtn2:true}" @click="fresh1">
-            <el-table :data="tableDataNew" stripe class="user-table" :span="24" :row-style="{height:'40px'}" :header-row-style="{height:'32px'}" :span-method="objectSpanMethod" :header-cell-style="headerCellStyle" :cell-style="cellStyle">
-                <el-table-column prop="strategy_name" label="策略名称" width="100"></el-table-column>
-                <el-table-column prop="strategy_id" label="策略ID" width="140"></el-table-column>
-                <el-table-column prop="event_type_desc" label="事件类型" width="100"></el-table-column>
-                <el-table-column prop="event_time" label="发生时间" width="180"></el-table-column>
-                <el-table-column prop="event_detail" label="事件详情" width="280"></el-table-column>
+            <el-table :data="tableDataNew" height="720" stripe class="user-table" :span="24" :row-style="{height:'40px'}" :header-row-style="{height:'32px'}" :header-cell-style="headerCellStyle" :cell-style="cellStyle">
+                <el-table-column v-for="(item,index) in name0" :key="index" :prop="item.key" :label="item.value" v-if="typetype==0"></el-table-column>
+                <el-table-column v-for="(item,index) in name1" :key="index" :prop="item.key" :label="item.value" v-if="typetype==1"></el-table-column>
             </el-table>
             <div class="pagination">
                 <el-pagination :current-page.sync="currentPage2" layout="prev, pager, next" :page-size="pageSzie2" :pager-count="5" :total="totalNew" @current-change="handleCurrentChange2"></el-pagination>
@@ -46,7 +43,6 @@
 
 <script>
 export default {
-  props: ["isFresh"],
   data() {
     return {
       tableDataNew: [],
@@ -64,7 +60,250 @@ export default {
       StrategyName1: [],
       StrategyID1: [],
       typetype: 1,
-      typetypename: "期货"
+      typetypename: "期货",
+      zhanghao: "",
+      zhList: [],
+      k: "",
+      name0: [
+        {
+          key: "accountCode",
+          value: "会员ID"
+        },
+        {
+          key: "accountName",
+          value: "会员名称"
+        },
+        {
+          key: "costPrice",
+          value: "参考成本"
+        },
+        {
+          key: "lastPrice",
+          value: "市价"
+        },
+        {
+          key: "productCode",
+          value: "产品编号"
+        },
+        {
+          key: "profit",
+          value: "参考盈亏"
+        },
+        {
+          key: "stockCnt",
+          value: "持仓数量"
+        },
+        {
+          key: "stockCntAble",
+          value: "可用数量"
+        },
+        {
+          key: "stockCode",
+          value: "股票代码"
+        },
+        {
+          key: "stockName",
+          value: "股票名称"
+        }
+      ],
+      name1: [
+        {
+          key: "trading_day",
+          value: "交易日"
+        },
+        {
+          key: "position_date_desc",
+          value: "持仓日期类型"
+        },
+        {
+          key: "user_account_id",
+          value: "账户名"
+        },
+        {
+          key: "fund_account_id",
+          value: "资金账户"
+        },
+        {
+          key: "contract_id",
+          value: "合约代码"
+        },
+        {
+          key: "buy_or_sell_desc",
+          value: "买卖方向"
+        },
+        {
+          key: "position_num",
+          value: "持仓数量"
+        },
+        {
+          key: "open_price",
+          value: "开仓均价"
+        },
+        {
+          key: "use_margin",
+          value: "占用的保证金"
+        },
+        {
+          key: "position_profit",
+          value: "持仓盈亏"
+        },
+        {
+          key: "hedge_flag_desc",
+          value: "投机套保标志"
+        },
+        {
+          key: "exchange_id",
+          value: "交易所代码"
+        },
+        {
+          key: "volume_multiple",
+          value: "合约乘数"
+        },
+        {
+          key: "broker_id",
+          value: "经纪公司代码"
+        },
+        {
+          key: "yd_position",
+          value: "上日持仓"
+        },
+        {
+          key: "long_frozen",
+          value: "多头冻结"
+        },
+        {
+          key: "short_frozen",
+          value: "空头冻结"
+        },
+        {
+          key: "long_frozen_amount",
+          value: "开仓冻结金额多头"
+        },
+        {
+          key: "short_frozen_amount",
+          value: "开仓冻结金额空头"
+        },
+        {
+          key: "open_volume",
+          value: "开仓量"
+        },
+        {
+          key: "close_volume",
+          value: "平仓量"
+        },
+        {
+          key: "open_amount",
+          value: "开仓金额"
+        },
+        {
+          key: "close_amount",
+          value: "平仓金额"
+        },
+        {
+          key: "position_cost",
+          value: "持仓成本"
+        },
+        {
+          key: "pre_margin",
+          value: "上次占用的保证金"
+        },
+        {
+          key: "frozen_margin",
+          value: "冻结的保证金"
+        },
+        {
+          key: "frozen_cash",
+          value: "冻结的资金"
+        },
+        {
+          key: "frozen_commission",
+          value: "冻结的手续费"
+        },
+        {
+          key: "cash_in",
+          value: "资金差额"
+        },
+        {
+          key: "commission",
+          value: "手续费"
+        },
+        {
+          key: "close_profit",
+          value: "平仓盈亏"
+        },
+        {
+          key: "pre_settlement_price",
+          value: "上次结算价"
+        },
+        {
+          key: "settlement_price",
+          value: "本次结算价"
+        },
+        {
+          key: "settlement_id",
+          value: "结算编号"
+        },
+        {
+          key: "open_cost",
+          value: "开仓成本"
+        },
+        {
+          key: "exchange_margin",
+          value: "交易所保证金"
+        },
+        {
+          key: "comb_position",
+          value: "组合成交形成的持仓"
+        },
+        {
+          key: "comb_long_frozen",
+          value: "组合多头冻结"
+        },
+        {
+          key: "comb_short_frozen",
+          value: "组合空头冻结"
+        },
+        {
+          key: "close_profit_by_date",
+          value: "逐日盯市平仓盈亏"
+        },
+        {
+          key: "close_profit_by_trade",
+          value: "逐笔对冲平仓盈亏"
+        },
+        {
+          key: "today_position",
+          value: "今日持仓"
+        },
+        {
+          key: "margin_rate_by_money",
+          value: "保证金率"
+        },
+        {
+          key: "margin_rate_by_volume",
+          value: "保证金率(按手数)"
+        },
+        {
+          key: "strike_frozen",
+          value: "执行冻结"
+        },
+        {
+          key: "strike_frozen_amount",
+          value: "执行冻结金额"
+        },
+        {
+          key: "abandon_frozen",
+          value: "放弃执行冻结"
+        },
+        {
+          key: "yd_strike_frozen",
+          value: "执行冻结的昨仓"
+        },
+        {
+          key: "invest_unit_id",
+          value: "投资单元代码"
+        }
+      ]
     };
   },
   computed: {
@@ -93,31 +332,66 @@ export default {
       },
       deep: true
     },
-    isFresh: {
+    zhanghao: {
       handler(newVal, oldVal) {
-        console.log("我是新值", newVal);
-        if (newVal == true) {
-          this.getAccountListNew();
+        this.k = newVal;
+        console.log("新值", newVal, this.k);
+        this.getAccountListNew();
+      },
+      deep: true
+    },
+    typetype: {
+      handler(newVal, oldVal) {
+        if (newVal == 1) {
+          this.getAccout(1);
+        } else {
+          this.getAccout(0);
         }
       },
       deep: true
     }
   },
   mounted() {
-    this.getAccountListNew();
     //EventType这是事件类型，StrategyID策略id，StrategyName策略名称，对哇
     this.getEventType("EventType");
     this.getEventType("StrategyName");
     this.getEventType("StrategyID");
+    if (this.typetype == 1) {
+      this.getAccout(1);
+    } else {
+      this.getAccout(0);
+    }
   },
   methods: {
     type0() {
       this.typetype = 0;
       this.typetypename = "证券";
+      this.getAccout(0);
     },
     type1() {
       this.typetype = 1;
       this.typetypename = "期货";
+      this.getAccout(1);
+    },
+    //获取交易账号
+    getAccout(type) {
+      this.axios
+        .post("/api.v1/account/options", {
+          type: type
+        })
+        .then(response => {
+          if (response.data.code == 0) {
+            this.zhList = response.data.data;
+            this.zhanghao = this.zhList[0].k || "";
+            this.k = this.zhanghao || "";
+            console.log("k", this.zhList, "k1", this.zhanghao, "k3", this.k);
+          } else {
+            this.$alert(response.data.msg);
+          }
+        })
+        .catch(err => {
+          console.log(err);
+        });
     },
     //当前行row、当前列column、当前行号rowIndex、当前列号columnIndex
     objectSpanMethod({ row, column, rowIndex, columnIndex }) {
@@ -138,21 +412,22 @@ export default {
     getAccountListNew() {
       this.refreshNew = true;
       this.axios
-        .post("/api.v1/strategy/log", {
+        .post("/api.v1/hold/list", {
           size: this.pageSzie2,
           page: this.currentPage2,
-          filter: {
-            EventType: this.value3,
-            StrategyName: this.value1,
-            StrategyID: this.value2,
-            EventTime: this.value4
-          },
-          option: {
-            EventType: "LIKE",
-            StrategyName: "LIKE",
-            StrategyID: "LIKE",
-            EventTime: "<="
-          }
+          k: this.k
+          //   filter: {
+          //     EventType: this.value3,
+          //     StrategyName: this.value1,
+          //     StrategyID: this.value2,
+          //     EventTime: this.value4
+          //   },
+          //   option: {
+          //     EventType: "LIKE",
+          //     StrategyName: "LIKE",
+          //     StrategyID: "LIKE",
+          //     EventTime: "<="
+          //   }
         })
         .then(response => {
           if (response.data.code == 0) {
@@ -162,7 +437,6 @@ export default {
             setTimeout(() => {
               this.refreshNew = false;
               this.freshBeel = false;
-              this.$emit("isFreshBeel", this.freshBeel);
             }, 1000);
           }
         })
@@ -224,8 +498,8 @@ export default {
 .freshbtn2 {
   width: 20px;
   position: absolute;
-  right: 70px;
-  top: 626px;
+  right: 96px;
+  top: 98px;
   z-index: 1000000;
   cursor: pointer;
 }
@@ -260,6 +534,7 @@ export default {
   float: right;
   height: 23px;
   line-height: 23px;
+  margin-right: 30px;
 }
 </style>
 <style>

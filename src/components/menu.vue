@@ -23,6 +23,9 @@
             <el-menu-item index="5" @click="routepath5">
               <span slot="title">成交查询</span>
             </el-menu-item>
+            <el-menu-item index="6" @click="routepath6">
+              <span slot="title">持仓查询</span>
+            </el-menu-item>
           </el-menu>
         </el-col>
       </el-row>
@@ -84,6 +87,11 @@ export default {
     routepath5() {
       this.$router.push({
         path: "index5"
+      });
+    },
+    routepath6() {
+      this.$router.push({
+        path: "index6"
       });
     },
     loginout() {
