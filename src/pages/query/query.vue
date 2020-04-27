@@ -26,6 +26,17 @@
                 <el-date-picker v-model="value4" type="datetime" placeholder="发生时间"></el-date-picker>
                 <el-button @click="search">搜索</el-button>
             </div> -->
+            <div class="rightSearch" v-if="typetype==0">
+                <div class="inputS">
+                    <label>产品编号：</label>
+                    <input type="text" placeholder="请输入产品编号" v-model="productCode"/>
+                </div>
+                <div class="inputS">
+                    <label>股票代码：</label>
+                    <input type="text" placeholder="请输入股票代码" v-model="stockCode" />
+                </div>
+                <el-button @click="search">搜索</el-button>
+            </div>
         </div>
         <!--底部公用的策略列表-->
         <div class="tableheight">
@@ -64,6 +75,8 @@ export default {
       zhanghao: "",
       zhList: [],
       k: "",
+      productCode: "",
+      stockCode: "",
       name0: [
         {
           key: "accountCode",
@@ -411,24 +424,24 @@ export default {
     },
     getAccountListNew() {
       this.refreshNew = true;
-      this.axios
-        .post("/api.v1/hold/list", {
+      let options;
+      if (this.typetype == 0) {
+        options = {
+          size: this.pageSzie2,
+          page: this.currentPage2,
+          k: this.k,
+          productCode: this.productCode,
+          stockCode: this.stockCode
+        };
+      } else {
+        options = {
           size: this.pageSzie2,
           page: this.currentPage2,
           k: this.k
-          //   filter: {
-          //     EventType: this.value3,
-          //     StrategyName: this.value1,
-          //     StrategyID: this.value2,
-          //     EventTime: this.value4
-          //   },
-          //   option: {
-          //     EventType: "LIKE",
-          //     StrategyName: "LIKE",
-          //     StrategyID: "LIKE",
-          //     EventTime: "<="
-          //   }
-        })
+        };
+      }
+      this.axios
+        .post("/api.v1/hold/list", options)
         .then(response => {
           if (response.data.code == 0) {
             this.tableDataNew = response.data.data.rows;
@@ -476,7 +489,7 @@ export default {
 <style lang="scss" scoped>
 .container {
   width: calc(100%-307px);
-  height:100vh;
+  height: 100vh;
   background: #fff;
   padding: 45px 91px 0 57px;
   box-sizing: border-box;
@@ -537,6 +550,21 @@ export default {
   height: 23px;
   line-height: 23px;
   margin-right: 30px;
+}
+.searchBox .rightSearch .inputS {
+  float: left;
+  height: 23px;
+  line-height: 23px;
+  margin-right: 10px;
+}
+.searchBox .rightSearch .inputS * {
+  float: left;
+}
+.searchBox .rightSearch .inputS input {
+  height: 23px;
+  line-height: 23px;
+  font-size: 14px;
+  border-bottom: 1px solid #ededed;
 }
 </style>
 <style>
