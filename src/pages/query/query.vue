@@ -31,8 +31,8 @@
         <div class="tableheight">
             <img src="../../assets/refr.png" alt="" :class="{'refresh-trigger': refreshNew,freshbtn2:true}" @click="fresh1">
             <el-table :data="tableDataNew" height="720" stripe class="user-table" :span="24" :row-style="{height:'40px'}" :header-row-style="{height:'32px'}" :header-cell-style="headerCellStyle" :cell-style="cellStyle">
-                <el-table-column v-for="(item,index) in name0" :key="index" :prop="item.key" :label="item.value" v-if="typetype==0"></el-table-column>
-                <el-table-column v-for="(item,index) in name1" :key="index" :prop="item.key" :label="item.value" v-if="typetype==1"></el-table-column>
+                <el-table-column v-for="(item,index) in name0" :key="index" :prop="item.key" :label="item.value" v-if="typetype==0" align="center"></el-table-column>
+                <el-table-column v-for="(item,index) in name1" :key="index" :prop="item.key" :label="item.value" v-if="typetype==1" width="100" align="center"></el-table-column>
             </el-table>
             <div class="pagination">
                 <el-pagination :current-page.sync="currentPage2" layout="prev, pager, next" :page-size="pageSzie2" :pager-count="5" :total="totalNew" @current-change="handleCurrentChange2"></el-pagination>

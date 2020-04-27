@@ -10,11 +10,11 @@
           <div class="jtitle">基础设置</div>
           <div class="j1">
             <div class="d1">策略名称</div>
-            <el-input v-model="strategy_name" :disabled="detail!=''"></el-input>
+            <el-input v-model="strategy_name" :disabled="queryId!=''"></el-input>
           </div>
           <div class="j1">
             <div class="d1">策略模板</div>
-            <el-select v-model="strategy_type" style="width:20%;" filterable clearable placeholder="策略模板" :disabled="detail!=''">
+            <el-select v-model="strategy_type" style="width:20%;" filterable clearable placeholder="策略模板" :disabled="queryId!=''">
               <el-option v-for="(item,index) in aKList" :key="index" :label="item.v" :value="item.k"></el-option>
             </el-select>
           </div>
@@ -152,8 +152,8 @@ export default {
       kb: "",
       a1: "",
       a2: "",
-      b1:"",
-      b2:"",
+      b1: "",
+      b2: "",
       p1: "",
       p2: "",
       p3: "",
@@ -163,8 +163,8 @@ export default {
     };
   },
   created() {
-    this.queryId = this.$route.query.strategyId;
-    this.detail=this.$route.query.detail||'';
+    this.queryId = this.$route.query.strategyId || "";
+    this.detail = this.$route.query.detail || "";
   },
   computed: {
     headerCellStyle() {
@@ -223,8 +223,8 @@ export default {
             this.kb = data.contract_list.split(",")[1];
             this.a1 = a.multiplier_order_num_a; //报单每手乘数
             this.a2 = a.multiplier_price_a; //价格放大倍数
-            this.a1 = a.multiplier_order_num_b; //报单每手乘数
-            this.a2 = a.multiplier_price_b; //价格放大倍数
+            this.b1 = a.multiplier_order_num_b; //报单每手乘数
+            this.b2 = a.multiplier_price_b; //价格放大倍数
             this.p1 = a.price_diff_open; //开仓价差
             this.p2 = a.price_diff_close; //平仓价差
             this.p3 = a.trade_lots; //每次交易对数
