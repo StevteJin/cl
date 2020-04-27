@@ -29,11 +29,11 @@
             <div class="rightSearch" v-if="typetype==0">
                 <div class="inputS">
                     <label>产品编号：</label>
-                    <input type="text" placeholder="请输入产品编号" v-model="productCode"/>
+                    <el-input type="text" clearable="true" placeholder="请输入产品编号" v-model="productCode" />
                 </div>
                 <div class="inputS">
                     <label>股票代码：</label>
-                    <input type="text" placeholder="请输入股票代码" v-model="stockCode" />
+                    <el-input type="text" clearable="true" placeholder="请输入股票代码" v-model="stockCode" />
                 </div>
                 <el-button @click="search">搜索</el-button>
             </div>
@@ -568,6 +568,9 @@ export default {
 }
 </style>
 <style>
+.searchBox .rightSearch .inputS .el-input {
+  width: auto !important;
+}
 .tableheight * {
   color: rgb(68, 71, 80) !important;
   font-size: 12px;
