@@ -10,10 +10,10 @@ import index from '@/pages/index/index'
 import index2 from '@/pages/index2/index2'
 //新策略
 import index3 from '@/pages/index3/index3'
-//策略
-import index4 from '@/components/sameTable'
-//策略
-import index5 from '@/components/sameTable'
+//委托查询
+import index4 from '@/pages/query/query'
+//成交查询
+import index5 from '@/pages/query/query'
 
 Vue.use(Router)
 
