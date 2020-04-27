@@ -2,8 +2,8 @@
     <div class="container query">
         <div class="template-top template-top3">
             <div class="title">
-                <span @click="type1" :class="{topactive:typetype==1}">期货成交</span>
-                <span @click="type0" :class="{topactive:typetype==0}">证券成交</span>
+                <span @click="type1" :class="{topactive:typetype==1}">期货查询</span>
+                <span @click="type0" :class="{topactive:typetype==0}">证券查询</span>
             </div>
         </div>
         <div class="searchBox">
@@ -476,10 +476,12 @@ export default {
 <style lang="scss" scoped>
 .container {
   width: calc(100%-307px);
+  height:100vh;
   background: #fff;
   padding: 45px 91px 0 57px;
   box-sizing: border-box;
   overflow: hidden;
+  border: 6px solid #7a7a7a;
 }
 .tableheight {
   background-color: transparent;
