@@ -17,14 +17,14 @@
             <el-menu-item index="2" @click="routepath2">
               <span slot="title">策略交易</span>
             </el-menu-item>
+            <el-menu-item index="6" @click="routepath6">
+              <span slot="title">持仓查询</span>
+            </el-menu-item>
             <el-menu-item index="4" @click="routepath4">
               <span slot="title">委托查询</span>
             </el-menu-item>
             <el-menu-item index="5" @click="routepath5">
               <span slot="title">成交查询</span>
-            </el-menu-item>
-            <el-menu-item index="6" @click="routepath6">
-              <span slot="title">持仓查询</span>
             </el-menu-item>
           </el-menu>
         </el-col>
@@ -54,7 +54,7 @@ export default {
     } else if (path == "/index2") {
       this.index = "2";
     } else if (path == "/index3") {
-      this.index = "3";
+      this.index = "2";
     } else if (path == "/index4") {
       this.index = "4";
     } else if (path == "/index5") {

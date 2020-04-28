@@ -9,7 +9,7 @@
       <br />
       <div class="operate-btn">
         <div class="search-box">
-          <input type="text" placeholder="搜索账号名" v-model="keyword" />
+          <el-input type="text" placeholder="搜索账号名" v-model="keyword" :clearable="true" />
           <div class="search-img" @click="search"></div>
         </div>
         <div class="addnow" @click="addAgent">增加{{typetypename}}账号</div>
@@ -92,7 +92,7 @@ export default {
         IP: "",
         Port: "",
         Remark: "",
-        ID:""
+        ID: ""
       },
       addDialogVisible: false,
       resetDialogVisible: false,
@@ -103,7 +103,7 @@ export default {
       ServerName: "",
       typetype: 0,
       typetypename: "证券",
-      refresh:false
+      refresh: false
     };
   },
   computed: {
@@ -148,7 +148,7 @@ export default {
     // this.getDepotNode();
   },
   methods: {
-    fresh(){
+    fresh() {
       this.getTellerList();
     },
     type0() {
@@ -236,7 +236,7 @@ export default {
             trade_account_id: this.ServerName,
             password: this.formInline.IP,
             broker_id: this.formInline.Port,
-            fund_account_id:this.formInline.ID,
+            fund_account_id: this.formInline.ID,
             type: this.typetype
           })
           .then(res => {
@@ -311,18 +311,29 @@ export default {
   box-sizing: border-box;
   overflow: hidden;
 }
-.freshbtn{
-  width:20px;
-  position:absolute;
-  right:120px;
-  top:230px;
-  z-index:1000000;
+.freshbtn {
+  width: 20px;
+  position: absolute;
+  right: 120px;
+  top: 230px;
+  z-index: 1000000;
   cursor: pointer;
 }
-.cboder{
-  border:6px solid #7a7a7a;
+.cboder {
+  border: 6px solid #7a7a7a;
   height: 100vh;
 }
+.cboder .el-input {
+  width: 340px !important;
+  height: 28px;
+}
+
 </style>
+<style>
+.cboder .template-top .search-box input {
+  width: 90% !important;
+}
+</style>
+
 
 

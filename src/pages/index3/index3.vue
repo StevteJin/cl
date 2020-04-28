@@ -23,7 +23,7 @@
         <div class="template-top">
           <div class="operate-btn">
             <div class="search-box">
-              <input type="text" placeholder="搜索策略名称" v-model="keyword" />
+              <el-input type="text" placeholder="搜索策略名称" v-model="keyword" :clearable="true"/>
               <div class="search-img" @click="searchA"></div>
             </div>
             <div class="addnow" @click="tonew">新建策略</div>
@@ -542,8 +542,15 @@ export default {
   z-index: 1000000;
   cursor: pointer;
 }
+.cxx .el-input {
+  width: 340px !important;
+  height: 28px;
+}
 </style>
 <style>
+.cxx .template-top .search-box input {
+  width: 90% !important;
+}
 .cxx .el-table__body-wrapper {
   border: 1px solid #ededed;
   box-sizing: border-box;
