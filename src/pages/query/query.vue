@@ -1,8 +1,8 @@
 <template>
     <div>
-        <div v-if="path=='/index4'" style="font-size:100px;color:#000;text-align:center;">委托暂无</div>
-        <div v-if="path=='/index5'" style="font-size:100px;color:#000;text-align:center;">成交暂无</div>
-        <div class="container query" v-if="path=='/index6'">
+        <!-- <div v-if="path=='/index4'" style="font-size:100px;color:#000;text-align:center;">委托暂无</div>
+        <div v-if="path=='/index5'" style="font-size:100px;color:#000;text-align:center;">成交暂无</div> -->
+        <div class="container query">
             <div class="template-top template-top3">
                 <div class="title">
                     <span @click="type1" :class="{topactive:typetype==1}">期货查询</span>
@@ -52,12 +52,13 @@
                     <el-button @click="search">搜索</el-button>
                 </div>
             </div>
-            <!--底部公用的策略列表-->
             <div class="tableheight">
                 <img src="../../assets/refr.png" alt="" :class="{'refresh-trigger': refreshNew,freshbtn2:true}" @click="fresh1">
                 <el-table :data="tableDataNew" height="720" stripe class="user-table" :span="24" :row-style="{height:'40px'}" :header-row-style="{height:'32px'}" :header-cell-style="headerCellStyle" :cell-style="cellStyle">
-                    <el-table-column v-for="(item,index) in name0" :key="index" :prop="item.key" :label="item.value" v-if="typetype==0" align="center"></el-table-column>
-                    <el-table-column v-for="(item,index) in name1" :key="index" :prop="item.key" :label="item.value" v-if="typetype==1" width="100" align="center"></el-table-column>
+                    <el-table-column v-for="(item,index) in name0" :key="index" :prop="item.key" :label="item.value" v-if="typetype==0&&path=='/index6'" align="center"></el-table-column>
+                    <el-table-column v-for="(item,index) in name1" :key="index" :prop="item.key" :label="item.value" v-if="typetype==1&&path=='/index6'" width="100" align="center"></el-table-column>
+                    <el-table-column v-for="(item,index) in name3" :key="index" :prop="item.key" :label="item.value" v-if="typetype==1&&path=='/index4'" width="100" align="center"></el-table-column>
+                    <el-table-column v-for="(item,index) in name4" :key="index" :prop="item.key" :label="item.value" v-if="typetype==1&&path=='/index5'" width="100" align="center"></el-table-column>
                 </el-table>
                 <div class="pagination">
                     <el-pagination :current-page.sync="currentPage2" layout="prev, pager, next" :page-size="pageSzie2" :pager-count="5" :total="totalNew" @current-change="handleCurrentChange2"></el-pagination>
@@ -334,7 +335,412 @@ export default {
           value: "投资单元代码"
         }
       ],
-      path: ""
+      name3: [
+        {
+          key: "invest_unit_id",
+          value: "策略编号"
+        },
+        {
+          key: "order_req_no",
+          value: "请求编号"
+        },
+        {
+          key: "status_msg",
+          value: "状态信息"
+        },
+        {
+          key: "order_req_no",
+          value: "请求编号"
+        },
+        {
+          key: "user_account_id",
+          value: "账户名称"
+        },
+        {
+          key: "fund_account_id",
+          value: "资金账户名"
+        },
+        {
+          key: "contract_id",
+          value: "合约代码"
+        },
+        {
+          key: "buy_or_sell_desc",
+          value: "买卖方向"
+        },
+        {
+          key: "open_or_cover",
+          value: "开平方向"
+        },
+        {
+          key: "order_num",
+          value: "报单数量"
+        },
+        {
+          key: "price",
+          value: "价格"
+        },
+        {
+          key: "state",
+          value: "报单状态"
+        },
+        {
+          key: "match_num",
+          value: "成交数量"
+        },
+        {
+          key: "active_user_id",
+          value: "操作用户代码"
+        },
+        {
+          key: "order_no",
+          value: "报单编号"
+        },
+        {
+          key: "comb_hedge_flag_desc",
+          value: "组合投机套保标志"
+        },
+        {
+          key: "order_time",
+          value: "委托日期时间"
+        },
+        {
+          key: "user_req_no",
+          value: "用户的请求编号"
+        },
+        {
+          key: "broker_id",
+          value: "经纪公司代码"
+        },
+        {
+          key: "exchange_id",
+          value: "交易所代码"
+        },
+        {
+          key: "order_ref",
+          value: "报单引用"
+        },
+        {
+          key: "order_req_no",
+          value: "请求编号"
+        },
+        {
+          key: "order_req_no",
+          value: "请求编号"
+        },
+        {
+          key: "order_price_type",
+          value: "请求编号"
+        },
+        {
+          key: "order_req_no",
+          value: "报单价格条件"
+        },
+        {
+          key: "time_condition",
+          value: "有效期类型"
+        },
+        {
+          key: "gtd_date",
+          value: "GTD日期"
+        },
+        {
+          key: "volume_condition",
+          value: "成交量类型"
+        },
+        {
+          key: "min_volume",
+          value: "最小成交量"
+        },
+        {
+          key: "contingent_condition",
+          value: "触发条件"
+        },
+        {
+          key: "stop_price",
+          value: "止损价"
+        },
+        {
+          key: "force_close_reason",
+          value: "强平原因"
+        },
+        {
+          key: "is_auto_suspend",
+          value: "自动挂起标志"
+        },
+        {
+          key: "business_unit",
+          value: "业务单元"
+        },
+        {
+          key: "order_local_id",
+          value: "本地报单编号"
+        },
+        {
+          key: "participant_id",
+          value: "会员代码"
+        },
+        {
+          key: "client_id",
+          value: "客户代码"
+        },
+        {
+          key: "exchange_inst_id",
+          value: "合约在交易所的代码"
+        },
+        {
+          key: "trader_id",
+          value: "交易所交易员代码"
+        },
+        {
+          key: "install_id",
+          value: "安装编号"
+        },
+        {
+          key: "order_submit_status",
+          value: "报单提交状态"
+        },
+        {
+          key: "notify_sequence",
+          value: "报单提示序号"
+        },
+        {
+          key: "trading_day",
+          value: "交易日"
+        },
+        {
+          key: "settlement_id",
+          value: "结算编号"
+        },
+        {
+          key: "order_source",
+          value: "报单来源"
+        },
+        {
+          key: "order_type",
+          value: "报单类型"
+        },
+        {
+          key: "volume_total",
+          value: "剩余数量"
+        },
+        {
+          key: "active_time",
+          value: "激活时间"
+        },
+        {
+          key: "suspend_time",
+          value: "挂起时间"
+        },
+        {
+          key: "update_time",
+          value: "最后修改时间"
+        },
+        {
+          key: "cancel_time",
+          value: "撤销时间"
+        },
+        {
+          key: "active_trader_id",
+          value: "最后修改交易所交易员代码"
+        },
+        {
+          key: "clearing_part_id",
+          value: "结算会员编号"
+        },
+        {
+          key: "sequence_no",
+          value: "序号"
+        },
+        {
+          key: "front_id",
+          value: "前置编号"
+        },
+        {
+          key: "user_product_info",
+          value: "用户端产品信息"
+        },
+        {
+          key: "user_force_close",
+          value: "用户强平标志"
+        },
+        {
+          key: "broker_order_seq",
+          value: "经纪公司报单编号"
+        },
+        {
+          key: "relative_order_sys_id",
+          value: "相关报单"
+        },
+        {
+          key: "zce_total_traded_volume",
+          value: "郑商所成交数量"
+        },
+        {
+          key: "is_swap_order",
+          value: "互换单标志"
+        },
+        {
+          key: "branch_id",
+          value: "营业部编号"
+        },
+        {
+          key: "account_id",
+          value: "报单提示序号"
+        },
+        {
+          key: "currency_id",
+          value: "币种代码"
+        },
+        {
+          key: "ip_address",
+          value: "IP地址"
+        },
+        {
+          key: "mac_address",
+          value: "Mac地址"
+        },
+        {
+          key: "error_msg",
+          value: "响应信息中的错误信息"
+        },
+        {
+          key: "error_id",
+          value: "响应信息中的错误代码"
+        },
+        {
+          key: "n_request_id",
+          value: "报单录入函数请求编号"
+        }
+      ],
+      name4: [
+        {
+          key: "invest_unit_id",
+          value: "策略编号"
+        },
+        {
+          key: "match_no",
+          value: "成交编号"
+        },
+        {
+          key: "user_account_id",
+          value: "账户名"
+        },
+        {
+          key: "fund_account_id",
+          value: "资金账户名"
+        },
+        {
+          key: "contract_id",
+          value: "合约代码"
+        },
+        {
+          key: "buy_or_sell_desc",
+          value: "买卖方向"
+        },
+        {
+          key: "open_or_cover_desc",
+          value: "开平方向"
+        },
+        {
+          key: "match_num",
+          value: "成交数量"
+        },
+        {
+          key: "match_price",
+          value: "成交价格"
+        },
+        {
+          key: "stop_price",
+          value: "策略网格线价格"
+        },
+        {
+          key: "commission",
+          value: "手续费"
+        },
+        {
+          key: "fund_account_commission",
+          value: "资金账户手续费"
+        },
+        {
+          key: "close_profit",
+          value: "平仓盈亏"
+        },
+        {
+          key: "hedge_flag",
+          value: "投机套保标志"
+        },
+        {
+          key: "trade_time",
+          value: "成交日期时间"
+        },
+        {
+          key: "order_no",
+          value: "报单编号"
+        },
+        {
+          key: "broker_id",
+          value: "经纪公司代码"
+        },
+        {
+          key: "exchange_id",
+          value: "交易所代码"
+        },
+        {
+          key: "order_ref",
+          value: "报单引用"
+        },
+        {
+          key: "participant_id",
+          value: "会员代码"
+        },
+        {
+          key: "client_id",
+          value: "客户代码"
+        },
+        {
+          key: "trading_role",
+          value: "交易角色"
+        },
+        {
+          key: "exchange_inst_id",
+          value: "合约在交易所的代码"
+        },
+        {
+          key: "order_local_id",
+          value: "本地报单编号"
+        },
+        {
+          key: "clearing_part_id",
+          value: "结算会员编号"
+        },
+        {
+          key: "business_unit",
+          value: "业务单元"
+        },
+        {
+          key: "sequence_no",
+          value: "序号"
+        },
+        {
+          key: "trading_day",
+          value: "交易日"
+        },
+        {
+          key: "settlement_id",
+          value: "结算编号"
+        },
+        {
+          key: "broker_order_seq",
+          value: "经纪公司报单编号"
+        },
+        {
+          key: "trade_source",
+          value: " 成交来源"
+        }
+      ],
+      path: "",
+      url: ""
     };
   },
   created() {
@@ -384,13 +790,23 @@ export default {
       },
       deep: true
     },
-    '$route.path': {
+    "$route.path": {
       handler(newVal, oldVal) {
-        this.path=newVal;
+        this.path = newVal;
         console.log("我是路由", this.path);
+        if (newVal == "/index4") {
+          //委托查询
+          this.url = "/api.v1/order/list";
+        } else if (newVal == "/index5") {
+          //成交查询
+          this.url = "/api.v1/deal/list";
+        } else if (newVal == "/index6") {
+          //持仓查询
+          this.url = "/api.v1/hold/list";
+        }
       },
       deep: true
-    },
+    }
   },
   mounted() {
     //EventType这是事件类型，StrategyID策略id，StrategyName策略名称，对哇
@@ -401,6 +817,16 @@ export default {
       this.getAccout(1);
     } else {
       this.getAccout(0);
+    }
+    if (this.path == "/index4") {
+      //委托查询
+      this.url = "/api.v1/order/list";
+    } else if (this.path == "/index5") {
+      //成交查询
+      this.url = "/api.v1/deal/list";
+    } else if (this.path == "/index6") {
+      //持仓查询
+      this.url = "/api.v1/hold/list";
     }
   },
   methods: {
@@ -453,28 +879,84 @@ export default {
     getAccountListNew() {
       this.refreshNew = true;
       let options;
-      if (this.typetype == 0) {
-        options = {
-          size: this.pageSzie2,
-          page: this.currentPage2,
-          k: this.k,
-          productCode: this.productCode,
-          stockCode: this.stockCode
-        };
-      } else {
-        options = {
-          size: this.pageSzie2,
-          page: this.currentPage2,
-          k: this.k,
-          filter: {
-            UserAccountID: this.UserAccountID,
-            ContractID: this.ContractID
-          },
-          option: { UserAccountID: "=", ContractID: "=" }
-        };
+      //0证券，1期货
+      //持仓查询
+      if (this.path == "/index6") {
+        if (this.typetype == 0) {
+          options = {
+            size: this.pageSzie2,
+            page: this.currentPage2,
+            k: this.k,
+            productCode: this.productCode,
+            stockCode: this.stockCode
+          };
+        } else {
+          options = {
+            size: this.pageSzie2,
+            page: this.currentPage2,
+            k: this.k,
+            filter: {
+              UserAccountID: this.UserAccountID,
+              ContractID: this.ContractID
+            },
+            option: { UserAccountID: "=", ContractID: "=" }
+          };
+        }
+      }
+      //委托查询
+      if (this.path == "/index4") {
+        if (this.typetype == 0) {
+          options = {
+            size: this.pageSzie2,
+            page: this.currentPage2,
+            k: this.k,
+            filter: {
+              UserAccountID: this.UserAccountID,
+              ContractID: this.ContractID
+            },
+            option: { UserAccountID: "=", ContractID: "=" }
+          };
+        } else {
+          options = {
+            size: this.pageSzie2,
+            page: this.currentPage2,
+            k: this.k,
+            filter: {
+              UserAccountID: this.UserAccountID,
+              ContractID: this.ContractID
+            },
+            option: { UserAccountID: "=", ContractID: "=" }
+          };
+        }
+      }
+      //成交查询
+      if (this.path == "/index5") {
+        if (this.typetype == 0) {
+          options = {
+            size: this.pageSzie2,
+            page: this.currentPage2,
+            k: this.k,
+            filter: {
+              UserAccountID: this.UserAccountID,
+              ContractID: this.ContractID
+            },
+            option: { UserAccountID: "=", ContractID: "=" }
+          };
+        } else {
+          options = {
+            size: this.pageSzie2,
+            page: this.currentPage2,
+            k: this.k,
+            filter: {
+              UserAccountID: this.UserAccountID,
+              ContractID: this.ContractID
+            },
+            option: { UserAccountID: "=", ContractID: "=" }
+          };
+        }
       }
       this.axios
-        .post("/api.v1/hold/list", options)
+        .post(this.url, options)
         .then(response => {
           if (response.data.code == 0) {
             this.tableDataNew = response.data.data.rows;
