@@ -797,12 +797,15 @@ export default {
         if (newVal == "/index4") {
           //委托查询
           this.url = "/api.v1/order/list";
+          this.getAccountListNew();
         } else if (newVal == "/index5") {
           //成交查询
           this.url = "/api.v1/deal/list";
+          this.getAccountListNew();
         } else if (newVal == "/index6") {
           //持仓查询
           this.url = "/api.v1/hold/list";
+          this.getAccountListNew();
         }
       },
       deep: true
