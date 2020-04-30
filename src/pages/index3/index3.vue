@@ -23,7 +23,7 @@
         <div class="template-top">
           <div class="operate-btn">
             <div class="search-box">
-              <el-input type="text" placeholder="搜索策略名称" v-model="keyword" :clearable="true"/>
+              <el-input type="text" placeholder="搜索策略名称" v-model="keyword" :clearable="true" />
               <div class="search-img" @click="searchA"></div>
             </div>
             <div class="addnow" @click="tonew">新建策略</div>
@@ -165,7 +165,7 @@ export default {
   },
   methods: {
     freshBeel(data) {
-      console.log('回调',data)
+      console.log("回调", data);
       this.isFresh = data;
     },
     fresh() {
@@ -251,6 +251,29 @@ export default {
               break;
             //策略自动终止
             case "7":
+              that.getDataList();
+              that.isFresh = true;
+              // that.getAccountList();
+              break;
+            /**
+                case TRADER: 8
+                  return "策略交易"
+                case DEAL: 9
+                  return "策略成交"
+                case NOTIFY: 10
+                  return "策略报单状态通知"
+               */
+            case "8":
+              that.getDataList();
+              that.isFresh = true;
+              // that.getAccountList();
+              break;
+            case "9":
+              that.getDataList();
+              that.isFresh = true;
+              // that.getAccountList();
+              break;
+            case "10":
               that.getDataList();
               that.isFresh = true;
               // that.getAccountList();

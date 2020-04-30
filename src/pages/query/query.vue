@@ -1,22 +1,22 @@
 <template>
-    <div>
-        <!-- <div v-if="path=='/index4'" style="font-size:100px;color:#000;text-align:center;">委托暂无</div>
+  <div>
+    <!-- <div v-if="path=='/index4'" style="font-size:100px;color:#000;text-align:center;">委托暂无</div>
         <div v-if="path=='/index5'" style="font-size:100px;color:#000;text-align:center;">成交暂无</div> -->
-        <div class="container query">
-            <div class="template-top template-top3">
-                <div class="title">
-                    <span @click="type1" :class="{topactive:typetype==1}">期货查询</span>
-                    <span @click="type0" :class="{topactive:typetype==0}">证券查询</span>
-                </div>
-            </div>
-            <div class="searchBox">
-                <div class="leftSearch">
-                    <label>当前账号</label>
-                    <el-select v-model="zhanghao" filterable clearable placeholder="当前账号">
-                        <el-option v-for="(item,index) in zhList" :key="index" :label="item.v" :value="item.k"></el-option>
-                    </el-select>
-                </div>
-                <!-- <div class="rightSearch">
+    <div class="container query">
+      <div class="template-top template-top3">
+        <div class="title">
+          <span @click="type1" :class="{topactive:typetype==1}">期货查询</span>
+          <span @click="type0" :class="{topactive:typetype==0}">证券查询</span>
+        </div>
+      </div>
+      <div class="searchBox">
+        <div class="leftSearch">
+          <label>当前账号</label>
+          <el-select v-model="zhanghao" filterable clearable placeholder="当前账号">
+            <el-option v-for="(item,index) in zhList" :key="index" :label="item.v" :value="item.k"></el-option>
+          </el-select>
+        </div>
+        <!-- <div class="rightSearch">
                 <el-select v-model="value1" filterable clearable placeholder="策略名称">
                     <el-option v-for="(item,index) in StrategyName1" :key="index" :label="item.v" :value="item.k"></el-option>
                 </el-select>
@@ -29,43 +29,45 @@
                 <el-date-picker v-model="value4" type="datetime" placeholder="发生时间"></el-date-picker>
                 <el-button @click="search">搜索</el-button>
             </div> -->
-                <div class="rightSearch" v-if="typetype==0">
-                    <div class="inputS">
-                        <label>产品编号：</label>
-                        <el-input type="text" :clearable="true" placeholder="请输入产品编号" v-model="productCode" />
-                    </div>
-                    <div class="inputS">
-                        <label>股票代码：</label>
-                        <el-input type="text" :clearable="true" placeholder="请输入股票代码" v-model="stockCode" />
-                    </div>
-                    <el-button @click="search">搜索</el-button>
-                </div>
-                <div class="rightSearch" v-if="typetype==1">
-                    <div class="inputS">
-                        <label>账户名：</label>
-                        <el-input type="text" :clearable="true" placeholder="请输入账户名" v-model="UserAccountID" />
-                    </div>
-                    <div class="inputS">
-                        <label>合约代码：</label>
-                        <el-input type="text" :clearable="true" placeholder="请输入合约代码" v-model="ContractID" />
-                    </div>
-                    <el-button @click="search">搜索</el-button>
-                </div>
-            </div>
-            <div class="tableheight">
-                <img src="../../assets/refr.png" alt="" :class="{'refresh-trigger': refreshNew,freshbtn2:true}" @click="fresh1">
-                <el-table :data="tableDataNew" height="720" stripe class="user-table" :span="24" :row-style="{height:'40px'}" :header-row-style="{height:'32px'}" :header-cell-style="headerCellStyle" :cell-style="cellStyle">
-                    <el-table-column v-for="(item,index) in name0" :key="index" :prop="item.key" :label="item.value" v-if="typetype==0&&path=='/index6'" align="center"></el-table-column>
-                    <el-table-column v-for="(item,index) in name1" :key="index" :prop="item.key" :label="item.value" v-if="typetype==1&&path=='/index6'" width="100" align="center"></el-table-column>
-                    <el-table-column v-for="(item,index) in name3" :key="index" :prop="item.key" :label="item.value" v-if="typetype==1&&path=='/index4'" width="100" align="center"></el-table-column>
-                    <el-table-column v-for="(item,index) in name4" :key="index" :prop="item.key" :label="item.value" v-if="typetype==1&&path=='/index5'" width="100" align="center"></el-table-column>
-                </el-table>
-                <div class="pagination">
-                    <el-pagination :current-page.sync="currentPage2" layout="prev, pager, next" :page-size="pageSzie2" :pager-count="5" :total="totalNew" @current-change="handleCurrentChange2"></el-pagination>
-                </div>
-            </div>
+        <div class="rightSearch" v-if="typetype==0&&path=='/index6'">
+          <div class="inputS">
+            <label>产品编号：</label>
+            <el-input type="text" :clearable="true" placeholder="请输入产品编号" v-model="productCode" />
+          </div>
+          <div class="inputS">
+            <label>股票代码：</label>
+            <el-input type="text" :clearable="true" placeholder="请输入股票代码" v-model="stockCode" />
+          </div>
+          <el-button @click="search">搜索</el-button>
         </div>
+        <div class="rightSearch" v-if="typetype==1">
+          <div class="inputS">
+            <label>账户名：</label>
+            <el-input type="text" :clearable="true" placeholder="请输入账户名" v-model="UserAccountID" />
+          </div>
+          <div class="inputS">
+            <label>合约代码：</label>
+            <el-input type="text" :clearable="true" placeholder="请输入合约代码" v-model="ContractID" />
+          </div>
+          <el-button @click="search">搜索</el-button>
+        </div>
+      </div>
+      <div class="tableheight">
+        <img src="../../assets/refr.png" alt="" :class="{'refresh-trigger': refreshNew,freshbtn2:true}" @click="fresh1">
+        <el-table :data="tableDataNew" height="720" stripe class="user-table" :span="24" :row-style="{height:'40px'}" :header-row-style="{height:'32px'}" :header-cell-style="headerCellStyle" :cell-style="cellStyle">
+          <el-table-column v-for="(item,index) in name0" :key="index" :prop="item.key" :label="item.value" v-if="typetype==0&&path=='/index6'" align="center"></el-table-column>
+          <el-table-column v-for="(item,index) in name1" :key="index" :prop="item.key" :label="item.value" v-if="typetype==1&&path=='/index6'" width="100" align="center"></el-table-column>
+          <el-table-column v-for="(item,index) in name3" :key="index" :prop="item.key" :label="item.value" v-if="typetype==1&&path=='/index4'" width="100" align="center"></el-table-column>
+          <el-table-column v-for="(item,index) in name5" :key="index" :prop="item.key" :label="item.value" v-if="typetype==0&&path=='/index4'" width="100" align="center"></el-table-column>
+          <el-table-column v-for="(item,index) in name4" :key="index" :prop="item.key" :label="item.value" v-if="typetype==1&&path=='/index5'" width="100" align="center"></el-table-column>
+          <el-table-column v-for="(item,index) in name6" :key="index" :prop="item.key" :label="item.value" v-if="typetype==0&&path=='/index5'" width="100" align="center"></el-table-column>
+        </el-table>
+        <div class="pagination">
+          <el-pagination :current-page.sync="currentPage2" layout="prev, pager, next" :page-size="pageSzie2" :pager-count="5" :total="totalNew" @current-change="handleCurrentChange2"></el-pagination>
+        </div>
+      </div>
     </div>
+  </div>
 </template>
 
 <script>
@@ -737,6 +739,98 @@ export default {
         {
           key: "trade_source",
           value: " 成交来源"
+        }
+      ],
+      name5: [
+        {
+          key: "strategy_id",
+          value: "策略ID"
+        },
+        {
+          key: "trade_account_id",
+          value: "交易账户"
+        },
+        {
+          key: "req_no",
+          value: "委托编号"
+        },
+        {
+          key: "pk_order",
+          value: "本地委托编号"
+        },
+        {
+          key: "stock_code",
+          value: "股票代码"
+        },
+        {
+          key: "stock_name",
+          value: "股票名称"
+        },
+        {
+          key: "appoint_type_desc",
+          value: "委托方向"
+        },
+        {
+          key: "appoint_cnt",
+          value: "委托数量"
+        },
+        {
+          key: "appoint_price",
+          value: "委托价格"
+        },
+        {
+          key: "appoint_status_desc",
+          value: "委托状态"
+        },
+        {
+          key: "appoint_time_desc",
+          value: "委托时间"
+        },
+        {
+          key: "deal_cnt",
+          value: "成交数量"
+        },
+        {
+          key: "deal_avr_price",
+          value: "成交价格"
+        }
+      ],
+      name6: [
+        {
+          key: "strategy_id",
+          value: "策略ID"
+        },
+        {
+          key: "account_code",
+          value: "交易账户"
+        },
+        {
+          key: "stock_code",
+          value: "股票代码"
+        },
+        {
+          key: "stock_name",
+          value: "股票名称"
+        },
+        {
+          key: "appoint_type_desc",
+          value: "成交方向"
+        },
+        {
+          key: "deal_cnt",
+          value: "成交数量"
+        },
+        {
+          key: "deal_avr_price",
+          value: "成交价格"
+        },
+        {
+          key: "deal_time",
+          value: "成交时间"
+        },
+        {
+          key: "appoint_order_code",
+          value: "委托ID"
         }
       ],
       path: "",
