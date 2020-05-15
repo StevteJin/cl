@@ -58,9 +58,9 @@
           <el-table-column v-for="(item,index) in name0" :key="index" :prop="item.key" :label="item.value" v-if="typetype==0&&path=='/index6'" align="center"></el-table-column>
           <el-table-column v-for="(item,index) in name1" :key="index" :prop="item.key" :label="item.value" v-if="typetype==1&&path=='/index6'" width="100" align="center"></el-table-column>
           <el-table-column v-for="(item,index) in name3" :key="index" :prop="item.key" :label="item.value" v-if="typetype==1&&path=='/index4'" width="100" align="center"></el-table-column>
-          <el-table-column v-for="(item,index) in name5" :key="index" :prop="item.key" :label="item.value" v-if="typetype==0&&path=='/index4'" width="100" align="center"></el-table-column>
+          <el-table-column v-for="(item,index) in name5" :key="index" :prop="item.key" :label="item.value" v-if="typetype==0&&path=='/index4'" align="center"></el-table-column>
           <el-table-column v-for="(item,index) in name4" :key="index" :prop="item.key" :label="item.value" v-if="typetype==1&&path=='/index5'" width="100" align="center"></el-table-column>
-          <el-table-column v-for="(item,index) in name6" :key="index" :prop="item.key" :label="item.value" v-if="typetype==0&&path=='/index5'" width="100" align="center"></el-table-column>
+          <el-table-column v-for="(item,index) in name6" :key="index" :prop="item.key" :label="item.value" v-if="typetype==0&&path=='/index5'" align="center"></el-table-column>
         </el-table>
         <div class="pagination">
           <el-pagination :current-page.sync="currentPage2" layout="prev, pager, next" :page-size="pageSzie2" :pager-count="5" :total="totalNew" @current-change="handleCurrentChange2"></el-pagination>
@@ -107,20 +107,16 @@ export default {
           value: "会员名称"
         },
         {
-          key: "costPrice",
-          value: "参考成本"
-        },
-        {
-          key: "lastPrice",
-          value: "市价"
-        },
-        {
           key: "productCode",
           value: "产品编号"
         },
         {
-          key: "profit",
-          value: "参考盈亏"
+          key: "stockCode",
+          value: "股票代码"
+        },
+        {
+          key: "stockName",
+          value: "股票名称"
         },
         {
           key: "stockCnt",
@@ -131,12 +127,16 @@ export default {
           value: "可用数量"
         },
         {
-          key: "stockCode",
-          value: "股票代码"
+          key: "costPrice",
+          value: "参考成本"
         },
         {
-          key: "stockName",
-          value: "股票名称"
+          key: "lastPrice",
+          value: "市价"
+        },
+        {
+          key: "profit",
+          value: "参考盈亏"
         }
       ],
       name1: [
@@ -356,7 +356,7 @@ export default {
         },
         {
           key: "user_account_id",
-          value: "账户名称"
+          value: "账户名"
         },
         {
           key: "fund_account_id",
@@ -783,6 +783,10 @@ export default {
           value: "委托状态"
         },
         {
+          key: "order_date_desc",
+          value: "委托日期"
+        },
+        {
           key: "appoint_time_desc",
           value: "委托时间"
         },
@@ -797,12 +801,12 @@ export default {
       ],
       name6: [
         {
-          key: "strategy_id",
-          value: "策略ID"
-        },
-        {
           key: "account_code",
           value: "交易账户"
+        },
+        {
+          key: "strategy_id",
+          value: "策略ID"
         },
         {
           key: "stock_code",
@@ -813,19 +817,23 @@ export default {
           value: "股票名称"
         },
         {
-          key: "appoint_type_desc",
-          value: "成交方向"
-        },
-        {
           key: "deal_cnt",
           value: "成交数量"
+        },
+        {
+          key: "appoint_type_desc",
+          value: "成交方向"
         },
         {
           key: "deal_avr_price",
           value: "成交价格"
         },
         {
-          key: "deal_time",
+          key: "deal_date_desc",
+          value: "成交日期"
+        },
+        {
+          key: "deal_time_desc",
           value: "成交时间"
         },
         {
