@@ -97,12 +97,24 @@
             <el-input v-model="StopLossPrice" :disabled="detail!=''||IsNeedStopWinOrStopLoss==0"></el-input>
           </div>
           <div class="j1">
-            <div class="d1">回落开仓浮动价格</div>
-            <el-input v-model="OpenAtrPrice" :disabled="detail!=''"></el-input>
+            <div class="d1">是否反弹买入</div>
+            <el-select v-model="OpenAtrEnable" style="width:20%;" filterable clearable :disabled="detail!=''">
+              <el-option v-for="(item,index) in isBoolArray" :key="index" :label="item.value" :value="item.key"></el-option>
+            </el-select>
           </div>
           <div class="j1">
-            <div class="d1">反弹平仓浮动价格</div>
-            <el-input v-model="CloseAtrPrice" :disabled="detail!=''"></el-input>
+            <div class="d1">反弹买入浮动价格</div>
+            <el-input v-model="OpenAtrPrice" :disabled="detail!=''||OpenAtrEnable==0"></el-input>
+          </div>
+          <div class="j1">
+            <div class="d1">是否回落卖出</div>
+            <el-select v-model="CloseAtrEnable" style="width:20%;" filterable clearable :disabled="detail!=''">
+              <el-option v-for="(item,index) in isBoolArray" :key="index" :label="item.value" :value="item.key"></el-option>
+            </el-select>
+          </div>
+          <div class="j1">
+            <div class="d1">回落卖出浮动价格</div>
+            <el-input v-model="CloseAtrPrice" :disabled="detail!=''||CloseAtrEnable==0"></el-input>
           </div>
         </div>
         <div class="jbox" v-if="strategy_type==8">
@@ -246,7 +258,9 @@ export default {
       NextOpenPrice: "",
       StopWinPrice: "",
       StopLossPrice: "",
+      OpenAtrEnable: "",
       OpenAtrPrice: "",
+      CloseAtrEnable: "",
       CloseAtrPrice: "",
       isBoolArray: [
         {
@@ -331,7 +345,7 @@ export default {
             } else if (this.strategy_type == 10) {
               this.k0 = data.trade_account_list.split(",")[0];
               let a = JSON.parse(data.python_strategy_data_config);
-              this.contract_id = a.contract_id;
+              this.contract_id = data.contract_list;
               this.StartPriceOfGrid = a.StartPriceOfGrid;
               this.PriceDiffOfGrid = a.PriceDiffOfGrid;
               this.LineNumberInSingleSideOfGrid =
@@ -346,6 +360,8 @@ export default {
               this.NextOpenPrice = a.NextOpenPrice;
               this.StopWinPrice = a.StopWinPrice;
               this.StopLossPrice = a.StopLossPrice;
+              this.OpenAtrEnable = a.OpenAtrEnable;
+              this.CloseAtrEnable = a.CloseAtrEnable;
               this.OpenAtrPrice = a.OpenAtrPrice;
               this.CloseAtrPrice = a.CloseAtrPrice;
             }
@@ -510,7 +526,7 @@ export default {
             contracts: this.contract_id,
 
             strategy_data_config: {
-              contract_id: this.contract_id,
+              contract_id: this.contract_id.split("-")[1],
               StartPriceOfGrid: this.StartPriceOfGrid,
               PriceDiffOfGrid: this.PriceDiffOfGrid,
               LineNumberInSingleSideOfGrid: this.LineNumberInSingleSideOfGrid,
@@ -524,6 +540,8 @@ export default {
               NextOpenPrice: this.NextOpenPrice,
               StopWinPrice: this.StopWinPrice,
               StopLossPrice: this.StopLossPrice,
+              OpenAtrEnable: this.OpenAtrEnable,
+              CloseAtrEnable: this.CloseAtrEnable,
               OpenAtrPrice: this.OpenAtrPrice,
               CloseAtrPrice: this.CloseAtrPrice
             }
@@ -570,6 +588,8 @@ export default {
         this.NextOpenPrice = "";
         this.StopWinPrice = "";
         this.StopLossPrice = "";
+        this.OpenAtrEnable = "";
+        this.CloseAtrEnable = "";
         this.OpenAtrPrice = "";
         this.CloseAtrPrice = "";
       } else {

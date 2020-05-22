@@ -97,7 +97,7 @@ const router = new Router({
 })
 
 router.beforeEach((to, from, next) => {
-  window.document.title = to.meta.title;
+  window.document.title = '金汇策略交易系统';
   window.scrollTo(0, 0);
   var userName = localStorage.getItem("remenberUsername");
   var token = localStorage.getItem("token");
