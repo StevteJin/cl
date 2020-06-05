@@ -43,6 +43,15 @@
             </el-select>
           </div>
         </div>
+        <div class="jbox" v-if="strategy_type==11">
+          <div class="jtitle">账号设置</div>
+          <div class="j1">
+            <div class="d1">证券交易账号</div>
+            <el-select v-model="k0" style="width:20%;" filterable clearable placeholder="证券交易账号" :disabled="detail!=''">
+              <el-option v-for="(item,index) in accountList0" :key="index" :label="item.v" :value="item.k"></el-option>
+            </el-select>
+          </div>
+        </div>
         <div class="jbox" v-if="strategy_type==10">
           <div class="jtitle">网格设置</div>
           <div class="j1">
@@ -70,6 +79,31 @@
           <div class="j1">
             <div class="d1">可用底仓数</div>
             <el-input v-model="BottomPositionNumReady" :disabled="detail!=''"></el-input>
+          </div>
+        </div>
+        <div class="jbox" v-if="strategy_type==11">
+          <div class="jtitle">网格设置</div>
+          <div class="j1">
+            <div class="d1">合约选择</div>
+            <el-select v-model="contract_id" style="width:20%;" filterable remote :remote-method="remoteMethodb" clearable placeholder="请输入证券合约" :disabled="detail!=''">
+              <el-option v-for="(item,index) in bList" :key="index" :label="item.v" :value="item.k"></el-option>
+            </el-select>
+          </div>
+          <div class="j1">
+            <div class="d1">起始价格</div>
+            <el-input v-model="StartPriceOfGrid" :disabled="detail!=''"></el-input>
+          </div>
+          <div class="j1">
+            <div class="d1">网格间隔</div>
+            <el-input v-model="PriceDiffOfGrid" :disabled="detail!=''"></el-input>
+          </div>
+          <div class="j1">
+            <div class="d1">网格上边界</div>
+            <el-input v-model="UpLimitPriceOfGrid" :disabled="detail!=''"></el-input>
+          </div>
+          <div class="j1">
+            <div class="d1">网格下边界</div>
+            <el-input v-model="DownLimitPriceOfGrid" :disabled="detail!=''"></el-input>
           </div>
         </div>
         <div class="jbox" style="float:right;margin-top:-410px;margin-right:400px;" v-if="strategy_type==10">
@@ -115,6 +149,35 @@
           <div class="j1">
             <div class="d1">回落卖出浮动价格</div>
             <el-input v-model="CloseAtrPrice" :disabled="detail!=''||CloseAtrEnable==0"></el-input>
+          </div>
+        </div>
+        <div class="jbox" style="float:right;margin-top:-410px;margin-right:400px;" v-if="strategy_type==11">
+          <div class="jtitle">交易设置</div>
+          <div class="j1">
+            <div class="d1">单次交易手数</div>
+            <el-input v-model="TradeLots" :disabled="detail!=''"></el-input>
+          </div>
+          <div class="j1">
+            <div class="d1">最大累计开仓次数</div>
+            <el-input v-model="MaxOpenCounts" :disabled="detail!=''"></el-input>
+          </div>
+          <div class="j1">
+            <div class="d1">最大同时持仓手数</div>
+            <el-input v-model="MaxLots" :disabled="detail!=''"></el-input>
+          </div>
+          <div class="j1">
+            <div class="d1">是否止盈止损</div>
+            <el-select v-model="IsNeedStopWinOrStopLoss" style="width:20%;" filterable clearable :disabled="detail!=''">
+              <el-option v-for="(item,index) in isBoolArray" :key="index" :label="item.value" :value="item.key"></el-option>
+            </el-select>
+          </div>
+          <div class="j1">
+            <div class="d1">止盈价格</div>
+            <el-input v-model="StopWinPrice" :disabled="detail!=''||IsNeedStopWinOrStopLoss==0"></el-input>
+          </div>
+          <div class="j1">
+            <div class="d1">起始手数</div>
+            <el-input v-model="StartLots" :disabled="detail!=''||IsNeedStopWinOrStopLoss==0"></el-input>
           </div>
         </div>
         <div class="jbox" v-if="strategy_type==8">
@@ -171,6 +234,9 @@
             <span style="line-height:18px;">&nbsp;对</span>
           </div>
         </div>
+        <!--这里加个K线 start-->
+        <div id="chart"></div>
+        <!--这里加个K线 end-->
         <div class="xbox">
           <div class="img" @click="back">
             <img src="../../assets/x1.png" alt="">
@@ -271,7 +337,10 @@ export default {
           key: "1",
           value: "是"
         }
-      ]
+      ],
+      UpLimitPriceOfGrid: "",
+      DownLimitPriceOfGrid: "",
+      MaxOpenCounts: ""
     };
   },
   created() {
@@ -364,9 +433,24 @@ export default {
               this.CloseAtrEnable = a.CloseAtrEnable;
               this.OpenAtrPrice = a.OpenAtrPrice;
               this.CloseAtrPrice = a.CloseAtrPrice;
+            } else if (this.strategy_type == 11) {
+              this.k0 = data.trade_account_list.split(",")[0];
+              let a = JSON.parse(data.python_strategy_data_config);
+              console.log("我是数据啊", a);
+              this.contract_id = data.contract_list;
+              this.StartPriceOfGrid = a.StartPriceOfGrid;
+              this.PriceDiffOfGrid = a.PriceDiffOfGrid;
+              this.UpLimitPriceOfGrid = a.UpLimitPriceOfGrid;
+              this.DownLimitPriceOfGrid = a.DownLimitPriceOfGrid;
+              this.TradeLots = a.TradeLots;
+              this.MaxOpenCounts = a.MaxOpenCounts;
+              this.MaxLots = a.MaxLots;
+              this.IsNeedStopWinOrStopLoss = a.IsNeedStopWinOrStopLoss;
+              this.StopWinPrice = a.StopWinPrice;
+              this.StartLots = a.StartLots;
+            } else {
+              this.$alert(response.data.msg);
             }
-          } else {
-            this.$alert(response.data.msg);
           }
         })
         .catch(err => {
@@ -544,6 +628,46 @@ export default {
               CloseAtrEnable: this.CloseAtrEnable,
               OpenAtrPrice: this.OpenAtrPrice,
               CloseAtrPrice: this.CloseAtrPrice
+            }
+          })
+          .then(response => {
+            if (response.data.code == 0) {
+              this.$router.push({
+                path: "index3"
+              });
+            } else {
+              this.$alert(response.data.msg);
+            }
+          })
+          .catch(err => {
+            console.log(err);
+          });
+      } else if (this.strategy_type == 11) {
+        this.axios
+          .post("api.v1/strategy/operate", {
+            //创建
+            operate_type: type,
+            strategy_id: id,
+            //策略名称
+            strategy_name: this.strategy_name,
+            //策略模板
+            strategy_type: this.strategy_type,
+            //账号设置
+            trade_accounts: this.k0,
+            //合约设置
+            contracts: this.contract_id,
+            strategy_data_config: {
+              contract_id: this.contract_id.split("-")[1],
+              StartPriceOfGrid: this.StartPriceOfGrid,
+              PriceDiffOfGrid: this.PriceDiffOfGrid,
+              UpLimitPriceOfGrid: this.UpLimitPriceOfGrid,
+              DownLimitPriceOfGrid: this.DownLimitPriceOfGrid,
+              TradeLots: this.TradeLots,
+              MaxOpenCounts: this.MaxOpenCounts,
+              MaxLots: this.MaxLots,
+              IsNeedStopWinOrStopLoss: this.IsNeedStopWinOrStopLoss,
+              StopWinPrice: this.StopWinPrice,
+              StartLots: this.StartLots
             }
           })
           .then(response => {
