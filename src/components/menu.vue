@@ -1,19 +1,9 @@
 <template>
   <div id="menu">
-    <div class="topbox">
-      <div class="name">{{userNameA}}</div>
-      <div class="rightname">
-        <span class="s1">{{userName}}</span><br/>
-        <span class="s2" @click="loginout">退出登录</span>
-      </div>
-    </div>
     <div class="nav">
       <el-row class="tac">
         <el-col>
-          <el-menu :default-active="index" class="el-menu-vertical-demo" @open="handleOpen" @close="handleClose">
-            <el-menu-item index="1" @click="routepath1">
-              <span slot="title">交易账号</span>
-            </el-menu-item>
+          <el-menu :default-active="index" class="el-menu-vertical-demo" mode="horizontal" @open="handleOpen" @close="handleClose">
             <el-menu-item index="2" @click="routepath2">
               <span slot="title">策略交易</span>
             </el-menu-item>
@@ -26,9 +16,22 @@
             <el-menu-item index="5" @click="routepath5">
               <span slot="title">成交查询</span>
             </el-menu-item>
+            <el-menu-item index="1" @click="routepath1">
+              <span slot="title">交易账号</span>
+            </el-menu-item>
           </el-menu>
         </el-col>
       </el-row>
+    </div>
+    <div class="topbox">
+      <!-- <div class="name">{{userNameA}}</div> -->
+      <div class="rightname">
+        <span class="s1">
+          <img src="../assets/mine.png" alt="">
+          <span> {{userName}}</span>
+        </span>
+        <span class="s2" @click="loginout">退出登录</span>
+      </div>
     </div>
   </div>
 </template>
@@ -122,16 +125,34 @@ export default {
   border-right: 0px;
 }
 #menu .el-menu-item.is-active {
-  background-color: #e46943;
-  color: #fff;
+  /* background-color: #e46943; */
+  /* color: rgb(74, 71, 74); */
+  color: #e46943;
 }
 #menu .el-menu-item {
-  height: 37px;
-  color: #fff;
-  background-color: #363636;
-  line-height: 37px;
+  height: 40px;
+  color: rgb(74, 71, 74);
+  /* background-color: #363636; */
+  line-height: 40px;
   padding-left: 30px;
-  margin-bottom: 9px;
+}
+.el-menu.el-menu--horizontal {
+  border-bottom: none;
+}
+.el-menu--horizontal > .el-menu-item.is-active {
+  border-bottom: 2px solid transparent;
+  position: relative;
+}
+.el-menu--horizontal > .el-menu-item.is-active:after {
+  content: "";
+  display: block;
+  width: 42px;
+  height: 2px;
+  background: #e46943;
+  color: #e46943;
+  position: absolute;
+  top: 30px;
+  left: 35px;
 }
 </style>
 

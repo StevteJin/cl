@@ -736,12 +736,12 @@ export default {
   overflow: hidden;
 }
 .leftpbox {
-  border: 6px solid #7a7a7a;
+  border: 6px solid rgb(214,211,214);
   overflow: hidden;
 }
 .leftpbox .lbox {
   float: left;
-  border-right: 6px solid #7a7a7a;
+  border-right: 6px solid rgb(214, 211, 214);
   padding-left: 10px;
   padding-right: 10px;
   padding-top: 37px;
@@ -809,8 +809,8 @@ export default {
 }
 .tableheight {
   background-color: transparent;
-  border-left: 6px solid #7a7a7a !important;
-  border-right: 6px solid #7a7a7a !important;
+  border-left: 6px solid rgb(214, 211, 214) !important;
+  border-right: 6px solid rgb(214, 211, 214) !important;
   height: 100%;
   box-sizing: border-box;
 }

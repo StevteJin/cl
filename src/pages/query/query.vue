@@ -5,8 +5,8 @@
     <div class="container query">
       <div class="template-top template-top3">
         <div class="title">
-          <span @click="type1" :class="{topactive:typetype==1}">期货查询</span>
           <span @click="type0" :class="{topactive:typetype==0}">证券查询</span>
+          <span @click="type1" :class="{topactive:typetype==1}">期货查询</span>
         </div>
       </div>
       <div class="searchBox">
@@ -88,7 +88,7 @@ export default {
       EventType1: [],
       StrategyName1: [],
       StrategyID1: [],
-      typetype: 1,
+      typetype: 0,
       typetypename: "期货",
       zhanghao: "",
       zhList: [],
@@ -1114,7 +1114,6 @@ export default {
   padding: 45px 91px 0 57px;
   box-sizing: border-box;
   overflow: hidden;
-  border: 6px solid #7a7a7a;
 }
 .tableheight {
   background-color: transparent;

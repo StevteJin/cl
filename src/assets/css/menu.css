@@ -1,20 +1,14 @@
 #menu {
-    width: 308px;
-    height: 100vh;
-    background: rgba(36, 36, 36, 1);
+    height: 40px;
     overflow: hidden;
-    float: left;
-    border-top:6px solid #7A7A7A;
+    border-bottom: 1px solid rgb(214, 211, 214);
 }
 
 .topbox {
-    width: 255px;
-    height: 111px;
-    background: rgba(54, 54, 54, 1);
+    width: 250px;
     border-radius: 4px;
-    margin-left: 20px;
-    margin-top: 40px;
     overflow: hidden;
+    float: right;
 }
 
 .topbox .name {
@@ -26,30 +20,47 @@
     font-size: 29px;
     line-height: 69px;
     text-align: center;
-    margin-left:25px;
-    margin-top:21px;
+    margin-left: 25px;
+    margin-top: 21px;
     float: left;
 }
 
 .topbox .rightname {
-    float: left;
-    margin-left:26px;
     overflow: hidden;
-    margin-top:36px;
 }
 
-.topbox .rightname .s1{
-    color:#fff;
-    font-size:22px;
+.topbox .rightname .s1 {
+    float: left;
+    color: #e46943;
+    font-size: 14px;
+    line-height: 40px;
+    margin-right: 20px;
+    border-left: 1px solid rgb(214, 211, 214);
+    padding-left: 20px;
 }
-.topbox .rightname .s2{
-    color:#E46943;
-    font-size:14px;
+
+.topbox .rightname .s1 * {
+    float: left;
+}
+
+.topbox .rightname .s1 img {
+    margin-top: 14px;
+    margin-right: 20px;
+}
+
+.topbox .rightname .s2 {
+    float: left;
+    color: rgb(74, 71, 74);
+    font-size: 14px;
     cursor: pointer;
+    line-height: 40px;
+    border-left: 1px solid rgb(214, 211, 214);
+    padding-left: 20px;
 }
-#menu .nav{
-    width:255px;
-    margin-left:20px;
-    margin-top:37px;
-    background-color:transparent;
+
+#menu .nav {
+    margin-left: 20px;
+    background-color: transparent;
+    float: left;
+    height: 40px;
 }

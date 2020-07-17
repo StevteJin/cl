@@ -76,7 +76,7 @@ export default {
             localStorage.setItem('token',token);
             localStorage.setItem('remenberUsername',this.form.username);
             this.$router.push({
-              path: 'tradeChannel'
+              path: 'index3'
             });
           } else {
             this.errMsg = res.data.msg;
@@ -105,6 +105,7 @@ export default {
 <style lang="scss" scoped>
 .login-container {
   width: 100%;
+  height:100vh;
   background: #242424;
   box-sizing: border-box;
 }

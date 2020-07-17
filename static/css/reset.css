@@ -71,7 +71,7 @@ input:-ms-input-placeholder {
 }
 
 .el-table--striped .el-table__body tr.el-table__row--striped.current-row td {
-    background: rgb(51, 98, 145) !important;
+    background: rgb(235, 148, 121) !important;
 }
 
 .el-table::before {
@@ -454,7 +454,7 @@ input:-ms-input-placeholder {
 .template-top {
     height: 25px;
     line-height: 25px;
-    margin-bottom: 65px;
+    margin-bottom: 10px;
 }
 
 .query .template-top3 {

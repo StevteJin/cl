@@ -320,7 +320,6 @@ export default {
   cursor: pointer;
 }
 .cboder {
-  border: 6px solid #7a7a7a;
   height: 100vh;
 }
 .cboder .el-input {

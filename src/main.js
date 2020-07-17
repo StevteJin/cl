@@ -17,8 +17,12 @@ Vue.use(infiniteScroll)
 import axios from './http'
 Vue.prototype.axios = axios
 
+//eharts
+import echarts from 'echarts'
+Vue.prototype.$echarts = echarts
 import layer from 'vue-layer'
 Vue.prototype.$layer = layer(Vue);
+
 //解决IE下面的promise报错
 import "babel-polyfill"
 
