@@ -4,7 +4,11 @@
       <div class="tobox">
         <!-- <div id="chart1"></div> -->
         <div class="kurl">
-          <span v-for="(item,index) in kurl" :key="index" @click="changeK(item.value)" :class="{kcolor:whok==item.value}">{{item.key}}</span>
+          <span v-for="(item,index) in kurl" :key="index" @click="changeK(item.value)" :class="{kcolor:whok==item.value,kspan:true}">
+            <img v-if="item.value=='R'&&whok=='R'" src="../../assets/TimeSharingLine.png" />
+            <img v-if="item.value=='R'&&whok!='R'" src="../../assets/TimeSharingLine1.png" />
+            <span v-if="item.value!='R'">{{item.key}}</span>
+          </span>
         </div>
         <iframe v-if="cUrl" :src="cUrl" frameborder="0" height="450px" width="100%"></iframe>
       </div>
@@ -1263,15 +1267,29 @@ export default {
 </script>
 <style lang="scss" scoped>
 .kurl {
+  margin-left: 60px;
+  margin-top: 8px;
+  margin-bottom: -4px;
+  position: relative;
 }
-.kurl span {
+.kurl img {
+  float: left;
+  width: 15px;
+  height: 11px;
+  margin-top: 2px;
+  margin-left: 3px;
+}
+.kurl .kspan {
   color: #333333;
   display: inline-block;
-  width: 30px;
-  height: 30px;
-  line-height: 30px;
+  width: 21px;
+  height: 16px;
+  line-height: 16px;
+  margin-right: 10px;
   text-align: center;
   cursor: pointer;
+  border-radius: 3px;
+  overflow: hidden;
 }
 .kcolor {
   background-color: #e46943;
