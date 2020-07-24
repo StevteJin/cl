@@ -1296,7 +1296,8 @@ export default {
   color: #fff !important;
 }
 .tobox {
-  height: 518px;
+  height: 478px;
+  margin-top:40px;
   border-bottom: 6px solid rgb(214, 211, 214);
 }
 .biglbox {
