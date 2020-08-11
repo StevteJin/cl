@@ -1,5 +1,5 @@
 <template>
-  <div class="container cxx">
+  <div class="cxx">
     <div class="leftpbox">
       <div class="lbox">
         <img src="../../assets/top1.png" alt="" @click="back" class="lb1">
@@ -106,7 +106,7 @@
             <el-input v-model="DownLimitPriceOfGrid" :disabled="detail!=''"></el-input>
           </div>
         </div>
-        <div class="jbox" style="float:right;margin-top:-410px;margin-right:400px;" v-if="strategy_type==10">
+        <div class="jbox" v-if="strategy_type==10">
           <div class="jtitle">交易设置</div>
           <div class="j1">
             <div class="d1">每单交易股数</div>
@@ -151,7 +151,7 @@
             <el-input v-model="CloseAtrPrice" :disabled="detail!=''||CloseAtrEnable==0"></el-input>
           </div>
         </div>
-        <div class="jbox" style="float:right;margin-top:-410px;margin-right:400px;" v-if="strategy_type==11">
+        <div class="jbox" v-if="strategy_type==11">
           <div class="jtitle">交易设置</div>
           <div class="j1">
             <div class="d1">单次交易手数</div>
@@ -211,7 +211,7 @@
             <el-input v-model="b1" :disabled="detail!=''"></el-input>
           </div>
         </div>
-        <div class="jbox" style="float:right;margin-top:-410px;margin-right:400px;" v-if="strategy_type==8">
+        <div class="jbox" v-if="strategy_type==8">
           <div class="jtitle">交易设置</div>
           <div class="j1">
             <div class="d1">开仓价差</div>
@@ -257,7 +257,7 @@
         </div>
       </div>
     </div>
-    <sameTable></sameTable>
+    <!-- <sameTable></sameTable> -->
   </div>
 </template>
 
@@ -370,6 +370,24 @@ export default {
     EventType1: {
       handler(newVal, oldVal) {
         console.log("新：", newVal, "旧", oldVal);
+      },
+      deep: true
+    },
+    contract_id: {
+      handler(newVal, oldVal) {
+        console.log("新：", newVal, "旧", oldVal);
+        if (newVal != oldVal) {
+          this.$emit("whokk", newVal);
+        }
+      },
+      deep: true
+    },
+    ka: {
+      handler(newVal, oldVal) {
+        console.log("1新：", newVal, "1旧", oldVal);
+        if (newVal != oldVal) {
+          this.$emit("whokk", newVal);
+        }
       },
       deep: true
     }
@@ -721,9 +739,11 @@ export default {
       }
     },
     back() {
-      this.$router.push({
-        path: "index3"
-      });
+      console.log(333);
+      this.$emit("whoseIndex", "index1");
+      // this.$router.push({
+      //   path: "index3"
+      // });
     }
   }
 };
@@ -736,19 +756,14 @@ export default {
   overflow: hidden;
 }
 .leftpbox {
-  border: 6px solid rgb(214,211,214);
+  border-bottom: 6px solid rgb(214, 211, 214);
   overflow: hidden;
 }
 .leftpbox .lbox {
   float: left;
-  border-right: 6px solid rgb(214, 211, 214);
-  padding-left: 10px;
-  padding-right: 10px;
-  padding-top: 37px;
-  padding-bottom: 37px;
+  border-right: 3px solid rgb(214, 211, 214);
 }
 .leftpbox .lbox .lb1 {
-  margin-top: 7px;
 }
 .leftpbox .lbox .lb2 {
   margin-top: -16px;
@@ -757,8 +772,26 @@ export default {
   width: 22px;
 }
 .leftpbox .rbox {
-  overflow: hidden;
-  width: calc(100%-40px);
+  height: 510px;
+  overflow-y: scroll;
+}
+
+.leftpbox .rbox::-webkit-scrollbar {
+  /*滚动条整体样式*/
+  width: 2px; /*高宽分别对应横竖滚动条的尺寸*/
+  height: 1px;
+}
+.leftpbox .rbox::-webkit-scrollbar-thumb {
+  /*滚动条里面小方块*/
+  border-radius: 50%;
+  box-shadow: inset 0 0 2px rgba(0, 0, 0, 0.2);
+  background: #535353;
+}
+.leftpbox .rbox::-webkit-scrollbar-track {
+  /*滚动条里面轨道*/
+  box-shadow: inset 0 0 2px rgba(0, 0, 0, 0.2);
+  border-radius: 50%;
+  background: #ededed;
 }
 .jbox {
   margin-top: 21px;

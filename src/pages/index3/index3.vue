@@ -88,77 +88,85 @@
           </div>
         </div>
       </div>
-      <div class="leftpbox" v-if="row!=null||(row==null&keyword!='')">
-        <div class="lbox">
-          <img src="../../assets/top.png" alt="" class="lb1">
-          <img src="../../assets/bottom.png" alt="" @click="tonew" class="lb2">
-        </div>
-        <div class="rbox">
-          <div class="template-top">
-            <div class="operate-btn">
-              <div class="search-box">
-                <el-input type="text" placeholder="搜索策略名称" v-model="keyword" :clearable="true" />
-                <div class="search-img" @click="searchA"></div>
+      <div v-if="whosename=='index1'">
+        <div class="leftpbox" v-if="row!=null||(row==null&keyword!='')">
+          <div class="lbox">
+            <img src="../../assets/top.png" alt="" class="lb1" @click="back">
+            <img src="../../assets/bottom.png" alt="" @click="tonew" class="lb2">
+          </div>
+          <div class="rbox">
+            <div class="template-top">
+              <div class="operate-btn">
+                <div class="search-box">
+                  <el-input type="text" placeholder="搜索策略名称" v-model="keyword" :clearable="true" />
+                  <div class="search-img" @click="searchA"></div>
+                </div>
+                <div class="addnow" @click="tonew">新建策略</div>
               </div>
-              <div class="addnow" @click="tonew">新建策略</div>
+            </div>
+            <div>
+              <img src="../../assets/refr.png" alt="" :class="{'refresh-trigger': refresh,freshbtn1:true}" @click="fresh">
+              <el-table :border="true" highlight-current-row :row-style="{height:'36px'}" :data="tableData1" stripe class="user-table bbbb" style="width: 100%;background-color:#fff;" height='400' :header-cell-style="headerCellStyle" @row-click="handdle">
+                <el-table-column show-overflow-tooltip prop="strategy_name" label="策略名称" align="center"></el-table-column>
+                <el-table-column prop="strategy_id" label="策略ID" width="140"></el-table-column>
+                <el-table-column prop="strategy_type_desc" label="策略类型" width="260"></el-table-column>
+                <el-table-column show-overflow-tooltip prop="strategy_create_time" label="创建时间" align="center" width="160"></el-table-column>
+                <el-table-column show-overflow-tooltip prop="strategy_last_modify_time" label="最后修改时间" align="center" width="160"></el-table-column>
+                <el-table-column show-overflow-tooltip label="运行状态" align="center" width="130">
+                  <template slot-scope="scope">
+                    <div>
+                      {{scope.row.strategy_status_desc}}
+                    </div>
+                  </template>
+                </el-table-column>
+
+                <el-table-column show-overflow-tooltip label="操作" align="center" width="300">
+                  <template slot-scope="scope">
+                    <div style="padding-left:90px;">
+                      <div class="xxbox x2x">
+                        <div v-if="scope.row.strategy_status_desc=='已终止'">
+                        </div>
+                        <div v-if="scope.row.strategy_status_desc=='运行中'" @click="stop1(scope.$index, scope.row)">
+                          <img src="../../assets/xxx4.png" alt="">
+                        </div>
+                        <div v-if="scope.row.strategy_status_desc=='已暂停'" @click="start2(scope.$index, scope.row)">
+                          <img src="../../assets/xxx2.png" alt="">
+                        </div>
+                      </div>
+                      <div class="xxbox x2x">
+                        <div v-if="scope.row.strategy_status_desc=='已终止'" @click="start1(scope.$index, scope.row)">
+                          <img src="../../assets/xxx2.png" alt="">
+                        </div>
+                        <div v-if="scope.row.strategy_status_desc=='运行中'" @click="stop2(scope.$index, scope.row)">
+                          <img src="../../assets/xxx3.png" alt="">
+                        </div>
+                        <div v-if="scope.row.strategy_status_desc=='已暂停'">
+                        </div>
+                      </div>
+                      <div class="xxbox xxxbox">
+                        <div @click="change1(scope.$index, scope.row)" v-if="scope.row.strategy_status_desc=='已终止'">
+                          <img src="../../assets/1.png" alt="">
+                        </div>
+                        <div @click="delete1(scope.$index, scope.row)" v-if="scope.row.strategy_status_desc=='已终止'">
+                          <img src="../../assets/2.png" alt="">
+                        </div>
+                        <div @click="change1(scope.$index, scope.row,'detail')">详情</div>
+                      </div>
+                    </div>
+                  </template>
+                </el-table-column>
+              </el-table>
+            </div>
+            <div class="pagination">
+              <el-pagination :current-page.sync="currentPage" layout="prev, pager, next" :page-size="pageSzie" :pager-count="5" :total="total1" @current-change="handleCurrentChange"></el-pagination>
             </div>
           </div>
-          <div>
-            <img src="../../assets/refr.png" alt="" :class="{'refresh-trigger': refresh,freshbtn1:true}" @click="fresh">
-            <el-table :border="true" highlight-current-row :row-style="{height:'36px'}" :data="tableData1" stripe class="user-table bbbb" style="width: 100%;background-color:#fff;" height='400' :header-cell-style="headerCellStyle" @row-click="handdle">
-              <el-table-column show-overflow-tooltip prop="strategy_name" label="策略名称" align="center"></el-table-column>
-              <el-table-column prop="strategy_id" label="策略ID" width="140"></el-table-column>
-              <el-table-column prop="strategy_type_desc" label="策略类型" width="260"></el-table-column>
-              <el-table-column show-overflow-tooltip prop="strategy_create_time" label="创建时间" align="center" width="160"></el-table-column>
-              <el-table-column show-overflow-tooltip prop="strategy_last_modify_time" label="最后修改时间" align="center" width="160"></el-table-column>
-              <el-table-column show-overflow-tooltip label="运行状态" align="center" width="130">
-                <template slot-scope="scope">
-                  <div>
-                    {{scope.row.strategy_status_desc}}
-                  </div>
-                </template>
-              </el-table-column>
-
-              <el-table-column show-overflow-tooltip label="操作" align="center" width="300">
-                <template slot-scope="scope">
-                  <div style="padding-left:90px;">
-                    <div class="xxbox x2x">
-                      <div v-if="scope.row.strategy_status_desc=='已终止'">
-                      </div>
-                      <div v-if="scope.row.strategy_status_desc=='运行中'" @click="stop1(scope.$index, scope.row)">
-                        <img src="../../assets/xxx4.png" alt="">
-                      </div>
-                      <div v-if="scope.row.strategy_status_desc=='已暂停'" @click="start2(scope.$index, scope.row)">
-                        <img src="../../assets/xxx2.png" alt="">
-                      </div>
-                    </div>
-                    <div class="xxbox x2x">
-                      <div v-if="scope.row.strategy_status_desc=='已终止'" @click="start1(scope.$index, scope.row)">
-                        <img src="../../assets/xxx2.png" alt="">
-                      </div>
-                      <div v-if="scope.row.strategy_status_desc=='运行中'" @click="stop2(scope.$index, scope.row)">
-                        <img src="../../assets/xxx3.png" alt="">
-                      </div>
-                      <div v-if="scope.row.strategy_status_desc=='已暂停'">
-                      </div>
-                    </div>
-                    <div class="xxbox xxxbox">
-                      <div @click="change1(scope.$index, scope.row)" v-if="scope.row.strategy_status_desc=='已终止'">
-                        <img src="../../assets/1.png" alt="">
-                      </div>
-                      <div @click="delete1(scope.$index, scope.row)" v-if="scope.row.strategy_status_desc=='已终止'">
-                        <img src="../../assets/2.png" alt="">
-                      </div>
-                      <div @click="change1(scope.$index, scope.row,'detail')">详情</div>
-                    </div>
-                  </div>
-                </template>
-              </el-table-column>
-            </el-table>
-          </div>
-          <div class="pagination">
-            <el-pagination :current-page.sync="currentPage" layout="prev, pager, next" :page-size="pageSzie" :pager-count="5" :total="total1" @current-change="handleCurrentChange"></el-pagination>
-          </div>
+        </div>
+      </div>
+      <div v-if="whosename=='index2'">
+        <div class="leftpbox" style="height:520px;">
+          <!--新建策略-->
+          <index2 v-on:whoseIndex="whoseIndex" v-on:whokk="whokk"></index2>
         </div>
       </div>
       <sameTable :isFresh="isFresh" @isFreshBeel="freshBeel"></sameTable>
@@ -168,9 +176,12 @@
 
 <script>
 import sameTable from "@/components/sameTable1";
+import index2 from "@/pages/index2/index2";
+
 export default {
   components: {
-    sameTable
+    sameTable,
+    index2
   },
   data() {
     return {
@@ -247,7 +258,8 @@ export default {
           value: "mk"
         }
       ],
-      whok: "R"
+      whok: "R",
+      whosename: "index1"
     };
   },
   created() {
@@ -353,6 +365,53 @@ export default {
     this.websocketclose();
   },
   methods: {
+    back() {
+      this.whosename = "index1";
+    },
+    whoseIndex: function(what) {
+      console.log("我");
+      console.log("我是", what);
+      this.whosename = what;
+    },
+    whokk: function(what) {
+      console.log("谁是", what);
+      if (what) {
+        if (what.split("-")[1]) {
+          console.log("是的");
+          this.contractCode = what.split("-")[1];
+        } else {
+          this.contractCode = what;
+        }
+      } else {
+        this.contractCode = "000001";
+      }
+      if (
+        this.contractCode.indexOf("600") == 0 ||
+        this.contractCode.indexOf("601") == 0 ||
+        this.contractCode.indexOf("603") == 0 ||
+        this.contractCode.indexOf("900") == 0 ||
+        this.contractCode.indexOf("688") == 0
+      ) {
+        this.contractCode = this.contractCode + "1";
+      }
+      if (
+        this.contractCode.indexOf("300") == 0 ||
+        this.contractCode.indexOf("002") == 0 ||
+        this.contractCode.indexOf("000") == 0 ||
+        this.contractCode.indexOf("200") == 0
+      ) {
+        this.contractCode = this.contractCode + "2";
+      }
+
+      this.cUrl =
+        "http://47.102.151.13:8077/pc/emchart-k.html?code=" +
+        this.contractCode +
+        "&width=1100&height=400&type=" +
+        this.whok;
+
+      // this.getDrawList();
+      // this.getAccountList();
+    },
     freshBeel(data) {
       console.log("回调", data);
       this.isFresh = data;
@@ -492,9 +551,10 @@ export default {
       }, 2000);
     },
     tonew() {
-      this.$router.push({
-        path: "index2"
-      });
+      this.whosename = "index2";
+      // this.$router.push({
+      //   path: "index2"
+      // });
     },
     searchA() {
       this.getDataList(this.keyword);
@@ -1297,7 +1357,7 @@ export default {
 }
 .tobox {
   height: 478px;
-  margin-top:40px;
+  margin-top: 40px;
   border-bottom: 6px solid rgb(214, 211, 214);
 }
 .biglbox {
